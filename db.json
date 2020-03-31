@@ -1,19 +1,6 @@
 {
     "articles": [
         {
-            "title": "SOLVE COMMON ISSUES",
-            "slug": "solve-common-issues-ccirmq",
-            "body": "**sdasd**\n\n# header",
-            "createdAt": "2020-03-31T07:13:03.456Z",
-            "updatedAt": "2020-03-31T07:13:03.456Z",
-            "tagList": [],
-            "description": "NEW ISSUES",
-            "author": {
-                "username": "test123abc123",
-                "bio": null,
-                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
-                "following": false
-            },
             "favorited": false,
             "favoritesCount": 1
         }
