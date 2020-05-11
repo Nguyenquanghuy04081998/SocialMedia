@@ -1,0 +1,49 @@
+.banner {
+  background-color: transparent;
+  /* background-image: url("../../../assets/background.jpg"); */
+  background-image: url('https://i.pinimg.com/originals/37/8c/d4/378cd4ea61758d6e802d4612b9c76583.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 350px;
+  padding: 0;
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #111111;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: all 0.8s ease;
+  /* transition: opacity 0.8s ease; */
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner:hover .overlay {
+  width: 100%;
+}
+.banner:hover .text {
+  opacity: 1;
+}
+.text {
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+}
+.nav-pills.outline-active .nav-link.active {
+  color: #111111 !important;
+  font-weight: 700;
+  border-bottom: 2px solid #111111 !important;
+}
+h1 {
+  line-height: 1.5;
+}

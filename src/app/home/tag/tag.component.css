@@ -1,0 +1,38 @@
+.sidebar {
+  /* border: 2px solid #111111; */
+  box-shadow: 0px 2px 15px -1px rgba(92, 91, 92, 1);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  transition: all 0.5s ease;
+}
+.sidebar p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.sidebar:hover {
+  transform: translateY(-15px);
+  position: relative;
+}
+.tag-pill {
+  transition: all 1s ease;
+  border: none;
+  outline: none;
+  border: 1px solid #fff;
+}
+.tag-pill:hover {
+  background-color: #ffffff;
+  border: 1px solid #111111;
+  color: #111111 !important;
+}
+
+.btn-tag {
+  background-color: #818a91;
+  color: #ffffff;
+}
+.btn-tag:hover {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #111111;
+}

@@ -1,0 +1,49 @@
+.editor-page {
+  background-image: url('https://i.pinimg.com/originals/37/8c/d4/378cd4ea61758d6e802d4612b9c76583.jpg');
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 50px 0;
+}
+.auth-page h1 {
+  color: #d1e4e6;
+}
+.auth-page a {
+  color: #d1e4e6;
+}
+.container.page {
+  margin-top: 0;
+}
+.form-bg {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 15px -1px rgba(81, 146, 148, 0.86);
+  padding: 50px;
+}
+a {
+  color: #363636;
+}
+form button {
+  background-color: rgb(42, 125, 131);
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+form button:hover {
+  background-color: rgb(57, 156, 163);
+}
+input {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #7f9b96;
+}
+input:focus {
+  background-color: transparent;
+}
+input::placeholder {
+  color: #797a7a;
+}
+.alert-danger {
+  background: transparent;
+  color: rgb(43, 155, 155);
+}

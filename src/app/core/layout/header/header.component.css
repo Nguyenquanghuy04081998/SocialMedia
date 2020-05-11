@@ -1,0 +1,6 @@
+.mt-2 {
+  margin-top: 16px;
+}
+.navbar-nav .nav-item + .nav-item {
+  margin-left: 0;
+}

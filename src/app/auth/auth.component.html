@@ -1,0 +1,101 @@
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+      <div class="form-bg p-5 col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">{{ title }}</h1>
+        <p class="text-xs-center">
+          <a routerLink="/auth/login" *ngIf="formType == 'register'"
+            >Have an account?</a
+          >
+          <a routerLink="/auth/register" *ngIf="formType == 'login'"
+            >Need an account?</a
+          >
+        </p>
+        <ul class="error-messages" *ngIf="errors?.username">
+          <li *ngFor="let err of errors.username">Username: {{ err }}</li>
+        </ul>
+        <ul class="error-messages" *ngIf="errors?.email">
+          <li *ngFor="let err of errors.email">Email: {{ err }}</li>
+        </ul>
+        <ul class="error-messages" *ngIf="errors?.password">
+          <li *ngFor="let err of errors.password">Password: {{ err }}</li>
+        </ul>
+        <ul class="error-messages" *ngIf="errorEmailOrPassword">
+          <li *ngFor="let err of errorEmailOrPassword">
+            Email or Password: {{ err }}
+          </li>
+        </ul>
+        <form [formGroup]="form" (submit)="submit()">
+          <fieldset class="form-group">
+            <input
+              formControlName="username"
+              class="form-control form-control-lg"
+              name="username"
+              type="text"
+              placeholder="Username"
+              *ngIf="formType == 'register'"
+            />
+            <div [hidden]="form.controls.username?.pristine">
+              <ul
+                class="alert alert-danger"
+                *ngIf="form.controls.username?.errors?.required"
+              >
+                Username is required
+              </ul>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <input
+              formControlName="email"
+              name="email"
+              class="form-control form-control-lg"
+              type="text"
+              placeholder="Email"
+            />
+            <div [hidden]="form.controls.email?.pristine">
+              <ul
+                class="alert alert-danger"
+                *ngIf="form.controls.email?.errors?.required"
+              >
+                Email is required
+              </ul>
+              <ul
+                class="alert alert-danger"
+                *ngIf="form.controls.email?.errors?.email"
+              >
+                Email is invalid
+              </ul>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <input
+              formControlName="password"
+              name="password"
+              class="form-control form-control-lg"
+              type="password"
+              placeholder="Password"
+              minlength="8"
+            />
+            <div [hidden]="form.controls.password?.pristine">
+              <ul
+                class="alert alert-danger"
+                *ngIf="form.controls.password?.errors?.required"
+              >
+                Password is required
+              </ul>
+              <ul
+                class="alert alert-danger"
+                *ngIf="form.controls.password?.errors?.minlength"
+              >
+                Password is at least 8 characters
+              </ul>
+            </div>
+          </fieldset>
+          <button type="submit" class="btn btn-lg pull-xs-right">
+            {{ title }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

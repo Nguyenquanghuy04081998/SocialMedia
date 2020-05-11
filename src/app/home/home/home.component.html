@@ -1,0 +1,49 @@
+<div class="home-page">
+  <div class="banner">
+    <div class="overlay">
+      <h1 class="text">Share your life</h1>
+    </div>
+  </div>
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{ active: config === 'feed' }"
+                (click)="setConfig('feed')"
+                >Your Feed</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{ active: config === 'all' }"
+                (click)="setConfig('all')"
+                >Global Feed
+                <span class="text-info">{{ describe }} {{ nameTag }}</span></a
+              >
+            </li>
+          </ul>
+        </div>
+        <app-list-article
+          [nameTag]="nameTag"
+          [config]="config"
+          [page]="pageIndex"
+          [pageSize]="pageSize"
+        >
+        </app-list-article>
+      </div>
+      <div class="col-md-3">
+        <app-tag (nameTag)="getNameTag($event)"></app-tag>
+      </div>
+      <app-pagination
+        (page)="getPage($event)"
+        (pageSize)="getPageSize($event)"
+      ></app-pagination>
+    </div>
+  </div>
+</div>
+<hr />

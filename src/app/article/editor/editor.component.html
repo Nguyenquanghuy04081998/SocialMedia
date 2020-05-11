@@ -1,0 +1,204 @@
+<div class="editor-page" *ngIf="checkType == false">
+  <div class="container page">
+    <div class="row">
+      <div class="form-bg col-md-10 offset-md-1 col-xs-12">
+        <form [formGroup]="form">
+          <fieldset>
+            <ul class="error-messages" *ngIf="erorr?.title">
+              <li *ngFor="let err of erorr?.title">Title: {{ err }}</li>
+            </ul>
+            <ul class="error-messages" *ngIf="erorr?.description">
+              <li *ngFor="let err of erorr?.description">
+                Description: {{ err }}
+              </li>
+            </ul>
+            <fieldset class="form-group">
+              <input
+                name="title"
+                formControlName="title"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="Article Title"
+              />
+              <div [hidden]="form.controls.title?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.title?.errors?.required"
+                >
+                  Title can't be blank, is too short (minimum is 1 character)
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                name="description"
+                formControlName="description"
+                type="text"
+                class="form-control"
+                placeholder="What's this article about?"
+              />
+              <div [hidden]="form.controls.description?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.description?.errors?.required"
+                >
+                  Description can't be blank,is too short (minimum is 1
+                  character)
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea
+                name="body"
+                formControlName="body"
+                class="form-control"
+                rows="8"
+                placeholder="Write your article (in markdown)"
+              ></textarea>
+              <div [hidden]="form.controls.body?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.body?.errors?.required"
+                >
+                  Body can't be blank
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter tags"
+                name="tagField"
+                [formControl]="tagField"
+                (keyup.enter)="addTag()"
+              />
+              <div class="tag-list mt-3">
+                <span
+                  *ngFor="let tag of article.tagList"
+                  class="tag-default tag-pill"
+                  (click)="removeTag(tag)"
+                >
+                  <i class="ion-close-round"></i>
+                  {{ tag }}
+                </span>
+              </div>
+            </fieldset>
+            <button
+              class="btn btn-lg pull-xs-right btn-primary"
+              type="button"
+              (click)="onSubmit()"
+            >
+              Publish Article
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- if edit -->
+
+<div class="editor-page" *ngIf="checkType == true">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <form [formGroup]="form">
+          <fieldset>
+            <ul class="error-messages" *ngIf="erorr?.title">
+              <li *ngFor="let err of erorr?.title">Title: {{ err }}</li>
+            </ul>
+            <ul class="error-messages" *ngIf="erorr?.description">
+              <li *ngFor="let err of erorr?.description">
+                Description: {{ err }}
+              </li>
+            </ul>
+            <fieldset class="form-group">
+              <input
+                name="title"
+                formControlName="title"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="Article Title"
+                [value]="articleEdit?.title"
+              />
+              <div [hidden]="form.controls.title?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.title?.errors?.required"
+                >
+                  Title can't be blank, is too short (minimum is 1 character)
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                name="description"
+                formControlName="description"
+                type="text"
+                class="form-control"
+                placeholder="What's this article about?"
+                [value]="articleEdit?.description"
+              />
+              <div [hidden]="form.controls.description?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.description?.errors?.required"
+                >
+                  Description can't be blank,is too short (minimum is 1
+                  character)
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea
+                name="body"
+                formControlName="body"
+                class="form-control"
+                rows="8"
+                placeholder="Write your article (in markdown)"
+                [value]="articleEdit?.body"
+              ></textarea>
+              <div [hidden]="form.controls.body?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.body?.errors?.required"
+                >
+                  Body can't be blank
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter tags"
+                name="tagField"
+                [formControl]="tagField"
+                (keyup.enter)="addTag()"
+              />
+              <div class="tag-list">
+                <span
+                  *ngFor="let tag of article.tagList"
+                  class="tag-default tag-pill"
+                  (click)="removeTag(tag)"
+                >
+                  <i class="ion-close-round"></i>
+                  {{ tag }}
+                </span>
+              </div>
+            </fieldset>
+            <button
+              class="btn btn-lg pull-xs-right btn-primary"
+              type="button"
+              (click)="onSubmit()"
+            >
+              Publish Article
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

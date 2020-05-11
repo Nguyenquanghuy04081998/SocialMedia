@@ -1,0 +1,39 @@
+<p *ngIf="error" style="margin-top: 20px; color: brown;">
+  No article are here...yet.
+</p>
+<div class="article-preview" *ngFor="let article of listFavorite">
+  <div class="article-meta">
+    <a (click)="navigate(article.author.username)"
+      ><img src="{{ article.author.image }}"
+    /></a>
+    <div class="info">
+      <a (click)="navigate(article.author.username)" class=" author">{{
+        article.author.username
+      }}</a>
+      <span class="date">{{ article.createdAt | date: 'MMM dd y' }}</span>
+    </div>
+    <button
+      class="btn btn-outline-info btn-sm pull-xs-right"
+      [ngClass]="{
+        'btn-outline-info': !article.favorited,
+        'btn-info': article.favorited
+      }"
+      (click)="toggleFavorite(article.slug, article.favorited)"
+    >
+      <i class="ion-heart"></i> {{ article.favoritesCount }}
+    </button>
+  </div>
+  <a (click)="navigateDetail(article.slug)" class="preview-link">
+    <h1 class="ellipsis">{{ article.title }}</h1>
+    <p class="ellipsis">{{ article.description }}</p>
+    <span>Read more...</span>
+    <ul class="ellipsis" class="tag-list">
+      <li
+        *ngFor="let tag of article.tagList"
+        class="tag-default tag-pill tag-outline ellipsis"
+      >
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>

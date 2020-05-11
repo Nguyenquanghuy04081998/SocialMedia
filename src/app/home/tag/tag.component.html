@@ -1,0 +1,17 @@
+<div class="sidebar">
+  <p>Popular Tags</p>
+  <button (click)="getNameTag('')" class="btn btn-tag">
+    Get all
+  </button>
+  <hr />
+  <div class="tag-list">
+    <button
+      (click)="getNameTag(item)"
+      class="tag-pill tag-default"
+      *ngFor="let item of tags"
+    >
+      <i class="fas fa-tags"></i>
+      {{ item }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+.auth-page {
+  background-image: url('https://i.pinimg.com/originals/37/8c/d4/378cd4ea61758d6e802d4612b9c76583.jpg');
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 100px;
+}
+.auth-page h1 {
+  color: #d1e4e6;
+}
+.auth-page a {
+  color: #d1e4e6;
+}
+.container.page {
+  margin-top: 0;
+}
+.form-bg {
+  background-color: transparent;
+  margin-top: 100px;
+  box-shadow: inset 0px 0px 16px 1px rgba(81, 146, 148, 0.86);
+}
+a {
+  color: #363636;
+}
+button {
+  background-color: rgb(42, 125, 131);
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+button:hover {
+  background-color: rgb(57, 156, 163);
+}
+input {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #7f9b96;
+}
+input:focus {
+  background-color: transparent;
+}
+input::placeholder {
+  color: #d1e4e6;
+}
+.alert-danger {
+  background: transparent;
+  color: aqua;
+}
+.form-control{
+  color: azure;
+}

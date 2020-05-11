@@ -1,0 +1,9 @@
+<div class="container">
+  <mat-paginator
+    (page)="setPage($event)"
+    [length]="length"
+    [pageSize]="20"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  >
+  </mat-paginator>
+</div>

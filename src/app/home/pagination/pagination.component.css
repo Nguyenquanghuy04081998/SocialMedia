@@ -1,0 +1,8 @@
+.active {
+  background-color: aqua;
+}
+
+mat-paginator {
+  margin-top: 15px;
+  /* background-color: rgb(174, 178, 179); */
+}

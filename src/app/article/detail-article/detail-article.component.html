@@ -1,0 +1,255 @@
+<div class="article-page" *ngIf="articleDetail != undefined">
+  <div class="banner">
+    <div class="container">
+      <h1>{{ articleDetail.title }}</h1>
+      <div class="article-meta">
+        <a (click)="navigate(articleDetail.author.username)"
+          ><img src="{{ articleDetail.author.image }}"
+        /></a>
+        <div class="info">
+          <a (click)="navigate(articleDetail.author.username)" class="author">{{
+            articleDetail.author.username
+          }}</a>
+          <span class="date">{{
+            articleDetail.createdAt | date: 'MMM dd y'
+          }}</span>
+        </div>
+
+        <ng-container *ngIf="checkUser">
+          <button
+            class="btn btn-sm btn-outline-secondary"
+            [routerLink]="['/editor', slug]"
+          >
+            <i class="fas fa-edit"></i>
+            &nbsp; Edit Article
+          </button>
+
+          &nbsp;&nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteArticle()"
+          >
+            <i class="fas fa-trash-alt"></i>
+            &nbsp; Delete Article
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="checkUser == false">
+          <button
+            (click)="follow()"
+            *ngIf="articleDetail?.author.following == false"
+            class="btn btn-sm btn-outline-secondary action-btn"
+          >
+            <i class="ion-plus-round"></i>
+            &nbsp; Follow {{ articleDetail?.author.username }}
+          </button>
+          <button
+            (click)="unFollow()"
+            *ngIf="articleDetail?.author.following == true"
+            class="btn btn-sm btn-outline-secondary action-btn"
+          >
+            <i class="ion-plus-round"></i>
+            &nbsp; Unfollow {{ articleDetail?.author.username }}
+          </button>
+          &nbsp;&nbsp;
+          <ng-container *ngIf="!articleDetail?.favorited">
+            <button
+              class="btn btn-outline-info btn-sm"
+              [ngClass]="{
+                'btn-outline-info': !articleDetail?.favorited,
+                'btn-info': articleDetail?.favorited
+              }"
+              (click)="
+                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
+              "
+            >
+              <i class="ion-heart"></i>
+              &nbsp; Favorite Post
+              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="articleDetail?.favorited">
+            <button
+              class="btn btn-outline-info btn-sm"
+              [ngClass]="{
+                'btn-outline-info': !articleDetail?.favorited,
+                'btn-info': articleDetail?.favorited
+              }"
+              (click)="
+                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
+              "
+            >
+              <i class=" ion-heart"></i>
+              &nbsp; Un-Favorite Post
+              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
+            </button>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row article-content">
+      <span
+        class="tag-pill tag-default"
+        *ngFor="let item of articleDetail.tagList"
+      >
+        {{ item }}
+      </span>
+      <div class="col-md-12">
+        <p>
+          {{ articleDetail.body }}
+        </p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="article-actions">
+      <div class="article-meta">
+        <a (click)="navigate(articleDetail.author.username)"
+          ><img src="{{ articleDetail.author.image }}"
+        /></a>
+        <div class="info">
+          <a (click)="navigate(articleDetail.author.username)" class="author">{{
+            articleDetail.author.username
+          }}</a>
+          <span class="date">{{
+            articleDetail.createdAt | date: 'MMM dd y'
+          }}</span>
+        </div>
+        <ng-container *ngIf="checkUser">
+          <button
+            class="btn btn-sm btn-outline-secondary"
+            [routerLink]="['/editor', slug]"
+          >
+            <i class="fas fa-edit"></i>
+            &nbsp; Edit Article
+          </button>
+          &nbsp;&nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteArticle()"
+          >
+            <i class="fas fa-trash-alt"></i>
+            &nbsp; Delete Article
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="checkUser == false">
+          <button
+            (click)="follow()"
+            *ngIf="articleDetail?.author.following == false"
+            class="btn btn-sm btn-outline-secondary action-btn"
+          >
+            <i class="ion-plus-round"></i>
+            &nbsp; Follow {{ articleDetail?.author.username }}
+            <span class="counter">({{ articleDetail.favoritesCount }})</span>
+          </button>
+          <button
+            (click)="unFollow()"
+            *ngIf="articleDetail?.author.following == true"
+            class="btn btn-sm btn-outline-secondary action-btn"
+          >
+            <i class="ion-plus-round"></i>
+            &nbsp; Unfollow {{ articleDetail?.author.username }}
+          </button>
+          &nbsp;&nbsp;
+          <ng-container *ngIf="!articleDetail?.favorited">
+            <button
+              class="btn btn-outline-info btn-sm"
+              [ngClass]="{
+                'btn-outline-info': !articleDetail?.favorited,
+                'btn-info': articleDetail?.favorited
+              }"
+              (click)="
+                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
+              "
+            >
+              <i class="ion-heart"></i>
+              &nbsp; Favorite Post
+              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="articleDetail?.favorited">
+            <button
+              class="btn btn-outline-info btn-sm"
+              [ngClass]="{
+                'btn-outline-info': !articleDetail?.favorited,
+                'btn-info': articleDetail?.favorited
+              }"
+              (click)="
+                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
+              "
+            >
+              <i class=" ion-heart"></i>
+              &nbsp; Un-Favorite Post
+              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
+            </button>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="container" *ngIf="isAuthenticated == false">
+      <p>
+        <a routerLink="/auth/login">Sign in</a> or
+        <a routerLink="/auth/register">sign up</a> to add comments on this
+        article.
+      </p>
+    </div>
+    <div class="row" *ngIf="isAuthenticated">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <form class="card comment-form">
+          <div class="card-block">
+            <textarea
+              name="comment"
+              [(ngModel)]="commentVal"
+              class="form-control"
+              placeholder="Write a comment..."
+              rows="3"
+              #comment
+            ></textarea>
+          </div>
+          <div class="card-footer">
+            <img [src]="userCurrent?.image" class="comment-author-img" />
+            <button
+              class="btn btn-sm btn-info"
+              (click)="postComment(comment.value)"
+            >
+              Post Comment
+            </button>
+          </div>
+        </form>
+
+        <div class="card" *ngFor="let item of comments">
+          <div class="card-block">
+            <p class="card-text">
+              {{ item?.body }}
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="" class="comment-author">
+              <img src="{{ item.author?.image }}" class="comment-author-img" />
+            </a>
+            &nbsp;
+            <a
+              routerLink="/profile/{{ item.author?.username }}"
+              class="comment-author"
+              >{{ item.author?.username }}</a
+            >
+            <span class="date-posted">{{
+              item.createdAt | date: 'MMMM d, y'
+            }}</span>
+            <span
+              *ngIf="userCurrent?.username == item.author?.username"
+              class="mod-options"
+            >
+              <i class="ion-trash-a" (click)="deleteComment(item.id)"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

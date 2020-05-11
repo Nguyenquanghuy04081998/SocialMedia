@@ -1,0 +1,113 @@
+<div class="settings-page">
+  <div class="container page">
+    <div class="row">
+      <div class="form-bg col-md-6 offset-md-3 col-xs-12">
+        <ul class="error-messages" *ngIf="errors?.username">
+          <li *ngFor="let err of errors?.username">Username: {{ err }}</li>
+        </ul>
+        <ul class="error-messages" *ngIf="errors?.password">
+          <li *ngFor="let err of errors?.password">Password: {{ err }}</li>
+        </ul>
+        <ul class="error-messages" *ngIf="errors?.email">
+          <li *ngFor="let err of errors?.email">Email: {{ err }}</li>
+        </ul>
+        <h1 class="text-xs-center">Your Settings</h1>
+
+        <form (submit)="submit()" [formGroup]="form">
+          <fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="image"
+                class="form-control"
+                type="text"
+                placeholder="URL of profile picture"
+                value="{{ userCurrent?.image }}"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="username"
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="Your Name"
+                value="{{ userCurrent?.username }}"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea
+                formControlName="bio"
+                class="form-control form-control-lg"
+                rows="8"
+                placeholder="Short bio about you"
+                value="{{ userCurrent?.bio }}"
+              ></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="email"
+                name="email"
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="Email"
+                value="{{ userCurrent?.email }}"
+              />
+              <div [hidden]="form.controls.email?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.email?.errors?.required"
+                >
+                  Email is required
+                </ul>
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.email?.errors?.email"
+                >
+                  Email is invalid
+                </ul>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="password"
+                name="password"
+                class="form-control form-control-lg"
+                type="password"
+                placeholder="New Password"
+                minlength="8"
+              />
+              <div [hidden]="form.controls.password?.pristine">
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.password?.errors?.required"
+                >
+                  Password is required
+                </ul>
+                <ul
+                  class="alert alert-danger"
+                  *ngIf="form.controls.password?.errors?.minlength"
+                >
+                  Password is at least 8 characters
+                </ul>
+              </div>
+            </fieldset>
+            <button class="btn btn-lg btn-primary pull-xs-right">
+              Update Settings
+            </button>
+          </fieldset>
+        </form>
+        <button
+          (click)="logOut()"
+          class="btn btn-lg btn-outline-danger pull-xs-left"
+        >
+          Log Out
+        </button>
+        <button
+          (click)="deleteAccount()"
+          class="btn btn-lg btn-outline-danger pull-xs-left"
+        >
+          Delete account!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
