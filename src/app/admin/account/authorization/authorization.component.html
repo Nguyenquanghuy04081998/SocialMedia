@@ -1,62 +1,76 @@
-<div class="row"  *ngIf="active==false">
-    <div class="col-md-6">
-      - User has been locked account
-    </div>
-    <div class="col-md-6">
-      <button (click)="UnlockAccount(user._id)" mat-button color="primary">UnLock account</button>
-    </div>
+<div class="row" *ngIf="active == false">
+  <div class="col-md-6">
+    - User has been locked account
   </div>
-  <ng-container *ngIf="user.admin">
-    <div class="container"  *ngIf="active">
-        <h1 style="text-align: center; color: brown;">Admin</h1>
-        <h2 style="text-align: center;color: brown;">Have a good day  <i class="fa fa-heart" aria-hidden="true"></i></h2>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="user.admin == false">
-  <div class="row"  *ngIf="active">
+  <div class="col-md-6">
+    <button (click)="UnlockAccount(user._id)" mat-button color="primary">
+      UnLock account
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="user.admin">
+  <div class="container" *ngIf="active">
+    <h1 style="text-align: center; color: brown;">Admin</h1>
+    <h2 style="text-align: center;color: brown;">
+      Have a good day <i class="fa fa-heart" aria-hidden="true"></i>
+    </h2>
+  </div>
+</ng-container>
+<ng-container *ngIf="user.admin == false">
+  <div class="row" *ngIf="active">
     <div class="col-md-6">
       - User has not been locked account
     </div>
     <div class="col-md-6">
-      <button (click)="lockAccount(user._id)"  mat-button color="warn">Lock account</button>
+      <button (click)="lockAccount(user._id)" mat-button color="warn">
+        Lock account
+      </button>
     </div>
   </div>
 </ng-container>
-  <!-- resole post -->
-  <ng-container *ngIf="user.admin == false">
-  <div class="row"  *ngIf="canPost==false">
+<!-- resole post -->
+<ng-container *ngIf="user.admin == false">
+  <div class="row" *ngIf="canPost == false">
     <div class="col-md-6">
       - User has been banned from posting
     </div>
     <div class="col-md-6">
-      <button (click)="UnlockPost(user._id)"  mat-button color="primary">UnLock Post</button>
+      <button (click)="UnlockPost(user._id)" mat-button color="primary">
+        UnLock Post
+      </button>
     </div>
   </div>
-  <div class="row"  *ngIf="canPost">
+  <div class="row" *ngIf="canPost">
     <div class="col-md-6">
       - User has not been banned from posting
     </div>
     <div class="col-md-6">
-      <button (click)="lockPost(user._id)" mat-button color="warn">Lock Post</button>
+      <button (click)="lockPost(user._id)" mat-button color="warn">
+        Lock Post
+      </button>
     </div>
   </div>
 </ng-container>
-  <!-- resovle comment -->
-  <ng-container *ngIf="user.admin == false">
-  <div class="row"  *ngIf="canComment==false">
+<!-- resovle comment -->
+<ng-container *ngIf="user.admin == false">
+  <div class="row" *ngIf="canComment == false">
     <div class="col-md-6">
       - User has been banned from commenting
     </div>
     <div class="col-md-6">
-      <button (click)="UnlockComment(user._id)" mat-button color="primary">UnLock Comment</button>
+      <button (click)="UnlockComment(user._id)" mat-button color="primary">
+        UnLock Comment
+      </button>
     </div>
   </div>
-  <div class="row"  *ngIf="canComment">
+  <div class="row" *ngIf="canComment">
     <div class="col-md-6">
       - User has not been banned from commenting
     </div>
     <div class="col-md-6">
-      <button (click)="lockComment(user._id)" mat-button color="warn">Lock Comment</button>
+      <button (click)="lockComment(user._id)" mat-button color="warn">
+        Lock Comment
+      </button>
     </div>
   </div>
 </ng-container>

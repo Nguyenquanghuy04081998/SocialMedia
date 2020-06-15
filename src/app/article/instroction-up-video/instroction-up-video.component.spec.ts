@@ -8,9 +8,8 @@ describe('InstroctionUpVideoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InstroctionUpVideoComponent ]
-    })
-    .compileComponents();
+      declarations: [InstroctionUpVideoComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,25 +1,35 @@
 <ol class="breadcrumb">
-    <li><a href="#">
-        <em class="fa fa-home"> / </em>
-    </a></li>
-    <li>Posts </li>
+  <li>
+    <a href="#">
+      <em class="fa fa-home"> / </em>
+    </a>
+  </li>
+  <li>Posts</li>
 </ol>
 <div class="content">
-<div class="title">
-    <h1 class="page-header">Posts are appreciated <i style="color: #007bff;" class="fas fa-star"></i></h1>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-9">
-      <form id = "search" style="width: 50%;">
-        <div class="form-group">
-          <input #input type="text" class="form-control" placeholder="Search author" (keyup)="search(input.value)">
-        </div>
-      </form>
+  <div class="title">
+    <h1 class="page-header">
+      Posts are appreciated <i style="color: #007bff;" class="fas fa-star"></i>
+    </h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <form id="search" style="width: 50%;">
+          <div class="form-group">
+            <input
+              #input
+              type="text"
+              class="form-control"
+              placeholder="Search author"
+              (keyup)="search(input.value)"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-<table class="table">
+  <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">slug</th>
@@ -30,28 +40,69 @@
         <th scope="col">action</th>
       </tr>
     </thead>
-    <tbody *ngIf="checked==false" >
-      <tr  *ngFor="let post of posts">
-        <th scope="row">{{post._id}}</th>
-        <td>{{post.title}}</td>
-        <td>{{post.favoritesCount}} <i style="color: #007bff;" class="fas fa-star"></i></td>
-        <td  [ngClass]="{'success':post.checked,'danger':post.checked==false}">{{post.checked}}</td>
-        <td>{{post.author.username}}</td>
-        <td ><button (click)="prohibit(post.slug)" style="margin-right: 5px;" mat-raised-button color="warn">Prohibit</button>
-          <button (click)="openDialog(post)" mat-raised-button color="primary">Detail</button></td>
+    <tbody *ngIf="checked == false">
+      <tr *ngFor="let post of posts">
+        <th scope="row">{{ post._id }}</th>
+        <td>{{ post.title }}</td>
+        <td>
+          {{ post.favoritesCount }}
+          <i style="color: #007bff;" class="fas fa-star"></i>
+        </td>
+        <td
+          [ngClass]="{ success: post.checked, danger: post.checked == false }"
+        >
+          {{ post.checked }}
+        </td>
+        <td>{{ post.author.username }}</td>
+        <td>
+          <button
+            (click)="prohibit(post.slug)"
+            style="margin-right: 5px;"
+            mat-raised-button
+            color="warn"
+          >
+            Prohibit
+          </button>
+          <button (click)="openDialog(post)" mat-raised-button color="primary">
+            Detail
+          </button>
+        </td>
       </tr>
     </tbody>
-    <tbody *ngIf="checked" >
-      <tr  *ngFor="let post of select">
-        <th scope="row">{{post._id}}</th>
-        <td>{{post.title}}</td>
-        <td>{{post.favoritesCount}} <i style="color: #007bff;" class="fas fa-star"></i></td>
-        <td  [ngClass]="{'success':post.checked,'danger':post.checked==false}">{{post.checked}}</td>
-        <td>{{post.author.username}}</td>
-        <td ><button (click)="prohibit(post.slug)" style="margin-right: 5px;" mat-raised-button color="warn">Prohibit</button>
-          <button (click)="openDialog(post)" mat-raised-button color="primary">Detail</button></td>
+    <tbody *ngIf="checked">
+      <tr *ngFor="let post of select">
+        <th scope="row">{{ post._id }}</th>
+        <td>{{ post.title }}</td>
+        <td>
+          {{ post.favoritesCount }}
+          <i style="color: #007bff;" class="fas fa-star"></i>
+        </td>
+        <td
+          [ngClass]="{ success: post.checked, danger: post.checked == false }"
+        >
+          {{ post.checked }}
+        </td>
+        <td>{{ post.author.username }}</td>
+        <td>
+          <button
+            (click)="prohibit(post.slug)"
+            style="margin-right: 5px;"
+            mat-raised-button
+            color="warn"
+          >
+            Prohibit
+          </button>
+          <button (click)="openDialog(post)" mat-raised-button color="primary">
+            Detail
+          </button>
+        </td>
       </tr>
     </tbody>
-    <h1 *ngIf="checked&&select?.length==0" style="color: #a29d9d; text-align: center; font-size: 15px;">-- There is no data in this section --</h1>
+    <h1
+      *ngIf="checked && select?.length == 0"
+      style="color: #a29d9d; text-align: center; font-size: 15px;"
+    >
+      -- There is no data in this section --
+    </h1>
   </table>
 </div>

@@ -1,20 +1,54 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <img mat-card-avatar class="example-header-image" src="http://localhost:3000/api/image/avatar?image_name={{post.author.image}}">
-      <mat-card-title>{{post.author.username}}</mat-card-title> <button *ngIf="!post.checked" (click)="openDialog(post)" style="border: none; background-color: white;"> <i style="color: red; font-weight: bold; font-size: 2rem;" class="fas fa-ban"></i></button>
-      <mat-card-subtitle>{{post.createdAt| date: 'MMM dd y'}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-title style="color: #2d2f3c; margin: 10px 0 20px 0;">{{post.title}}</mat-card-title>
-    <img *ngIf="post.image" mat-card-image src="http://localhost:3000/api/image?image_name={{post?.image}}" alt="Photo">
-    <div *ngIf="post.video" class="col-md-6">
-      <iframe width="560" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(getVideo())' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <mat-card-content>
-      <p>
-        {{post.body}}
-      </p>
-    </mat-card-content>
-    <mat-chip-list >
-      <mat-chip *ngFor="let item of post.tagList" color="primary" selected>{{item}}</mat-chip>
-    </mat-chip-list>
-  </mat-card>
+  <mat-card-header>
+    <img
+      mat-card-avatar
+      class="example-header-image"
+      src="http://localhost:3000/api/image/avatar?image_name={{
+        post.author.image
+      }}"
+    />
+    <mat-card-title>{{ post.author.username }}</mat-card-title>
+    <button
+      *ngIf="!post.checked"
+      (click)="openDialog(post)"
+      style="border: none; background-color: white;"
+    >
+      <i
+        style="color: red; font-weight: bold; font-size: 2rem;"
+        class="fas fa-ban"
+      ></i>
+    </button>
+    <mat-card-subtitle>{{
+      post.createdAt | date: 'MMM dd y'
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-title style="color: #2d2f3c; margin: 10px 0 20px 0;">{{
+    post.title
+  }}</mat-card-title>
+  <img
+    *ngIf="post.image"
+    mat-card-image
+    src="http://localhost:3000/api/image?image_name={{ post?.image }}"
+    alt="Photo"
+  />
+  <div *ngIf="post.video" class="col-md-6">
+    <iframe
+      width="560"
+      height="315"
+      [src]="sanitizer.bypassSecurityTrustResourceUrl(getVideo())"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <mat-card-content>
+    <p>
+      {{ post.body }}
+    </p>
+  </mat-card-content>
+  <mat-chip-list>
+    <mat-chip *ngFor="let item of post.tagList" color="primary" selected>{{
+      item
+    }}</mat-chip>
+  </mat-chip-list>
+</mat-card>

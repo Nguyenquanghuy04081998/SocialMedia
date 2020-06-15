@@ -1,43 +1,42 @@
-
 h1.page-header {
-    margin-top: 20px;
-    margin-left: 20px;
-    border-bottom: 0; 
+  margin-top: 20px;
+  margin-left: 20px;
+  border-bottom: 0;
 }
-.breadcrumb em{
-    color: #30a5ff;
+.breadcrumb em {
+  color: #30a5ff;
 }
-.breadcrumb{
-    border-radius: 0;
-    padding: 10px 15px 10px 15px;
-    background: #e9ecf2;
-    margin: 0; 
+.breadcrumb {
+  border-radius: 0;
+  padding: 10px 15px 10px 15px;
+  background: #e9ecf2;
+  margin: 0;
 }
-table{
-    border-collapse: collapse;
-    margin-left: 5px;
-    background-color: white;
+table {
+  border-collapse: collapse;
+  margin-left: 5px;
+  background-color: white;
 }
 .table {
-    border-top: 1px solid #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 2px 15px -1px rgba(92, 91, 92, 1);
-  }
-#success{
-    background-color: green;
-    color: white;
+  border-top: 1px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 15px -1px rgba(92, 91, 92, 1);
 }
-.success{
-    color: green;
-    font-weight: bold;
+#success {
+  background-color: green;
+  color: white;
 }
-.danger{
-    color: red;
-    font-weight: bold;
+.success {
+  color: green;
+  font-weight: bold;
 }
-.hight{
-    color: #007bff;
+.danger {
+  color: red;
+  font-weight: bold;
 }
-.yellow{
-    color: #e4f11f;
+.hight {
+  color: #007bff;
+}
+.yellow {
+  color: #e4f11f;
 }

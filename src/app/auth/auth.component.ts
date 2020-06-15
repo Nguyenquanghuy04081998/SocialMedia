@@ -39,10 +39,10 @@ export class AuthComponent implements OnInit {
     });
   }
   openDialog() {
-    const dialogConfig  = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
     dialogConfig.height = '250px';
-    const dialogRef = this.dialog.open(ForgotComponent,dialogConfig);
+    const dialogRef = this.dialog.open(ForgotComponent, dialogConfig);
   }
   submit() {
     this.userService.resovleAuth(this.formType, this.form.value).subscribe(

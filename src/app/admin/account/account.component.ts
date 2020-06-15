@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogConfig
+} from '@angular/material/dialog';
 import { DetailComponent } from './detail/detail.component';
 import { Observable } from 'rxjs';
 import { ForgotComponent } from './forgot/forgot.component';
@@ -13,49 +18,47 @@ import { ForgotComponent } from './forgot/forgot.component';
 export class AccountComponent implements OnInit {
   users;
   select;
-  checked= false;
+  checked = false;
   length;
   userForgot;
   displayedColumns = ['username'];
-  constructor(private apiService: ApiService,public dialog: MatDialog) { }
+  constructor(private apiService: ApiService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.reset();
-    this.apiService.get('/users/all').subscribe(e=>{
-      this.userForgot=e.user.filter(e=>e.forgot==true);
-      this.length=this.userForgot.length; 
-    })
-    
+    this.apiService.get('/users/all').subscribe(e => {
+      this.userForgot = e.user.filter(e => e.forgot == true);
+      this.length = this.userForgot.length;
+    });
   }
 
-  getSelect(value){
+  getSelect(value) {
     this.checked = true;
-    if(value=='active'){
-      this.select = this.users.filter(e=>e.active == false);
+    if (value == 'active') {
+      this.select = this.users.filter(e => e.active == false);
     }
-    if(value=='posting'){
-      this.select =this.users.filter(e=>e.canPost == false);
+    if (value == 'posting') {
+      this.select = this.users.filter(e => e.canPost == false);
     }
-    if(value=='comment'){
-      this.select =this.users.filter(e=>e.canComment == false);
+    if (value == 'comment') {
+      this.select = this.users.filter(e => e.canComment == false);
     }
-    if(value =='Choose...') {
+    if (value == 'Choose...') {
       this.checked = false;
       this.reset();
     }
   }
 
   openDialog(user) {
-    const dialogConfig  = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
     dialogConfig.width = '660px';
     dialogConfig.height = '800px';
-    const dialogRef = this.dialog.open(DetailComponent,dialogConfig);
+    const dialogRef = this.dialog.open(DetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       this.reset();
     });
-
   }
   // openDialogForgot(user){
   //   const dialogConfig  = new MatDialogConfig();
@@ -67,16 +70,18 @@ export class AccountComponent implements OnInit {
   //     this.reset();
   //   });
   // }
-  
-  reset(){
-    this.apiService.get('/users/all').subscribe(data=>{
+
+  reset() {
+    this.apiService.get('/users/all').subscribe(data => {
       this.users = data.user;
     });
   }
-  search(value){
+  search(value) {
     this.checked = true;
-    this.select =this.users.filter(e=>e.email.toLowerCase().indexOf(value.toLowerCase())!==-1);
-    if(value==''){
+    this.select = this.users.filter(
+      e => e.email.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+    if (value == '') {
       this.checked = false;
     }
   }

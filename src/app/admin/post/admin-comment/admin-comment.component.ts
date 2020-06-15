@@ -9,29 +9,30 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class AdminCommentComponent implements OnInit {
   slug;
-  constructor(private apiService: ApiService,
+  constructor(
+    private apiService: ApiService,
     public dialogRef: MatDialogRef<AdminCommentComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
-      this.slug = data
-    }
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.slug = data;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  ngOnInit(): void {
-  }
-  submit(comment){
+  ngOnInit(): void {}
+  submit(comment) {
     const result = confirm('Are you sure to prohibit?!');
     if (result === true) {
-    this.apiService.post(`/articles/${this.slug}/prohibit`).subscribe(e=>{
-      this.apiService.post(`/users/${this.slug}/adminComment`,{text:comment}).subscribe(e=>{
-        this.dialogRef.close();
-      })
-    })
+      this.apiService.post(`/articles/${this.slug}/prohibit`).subscribe(e => {
+        this.apiService
+          .post(`/users/${this.slug}/adminComment`, { text: comment })
+          .subscribe(e => {
+            this.dialogRef.close();
+          });
+      });
+    }
+    return;
   }
-  return;
-    
-  }
-
 }

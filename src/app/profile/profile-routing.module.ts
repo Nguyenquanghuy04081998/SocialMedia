@@ -20,7 +20,7 @@ const routes: Routes = [
         component: FavoritedComponent
       },
       {
-        path:'prohibit',
+        path: 'prohibit',
         component: BandArticleComponent
       }
     ]

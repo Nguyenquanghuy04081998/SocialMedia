@@ -1,24 +1,37 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <img mat-card-avatar class="example-header-image" src="http://localhost:3000/api/image/avatar?image_name={{user.image}}">
-      <mat-card-title>{{user.username}}</mat-card-title>
-      
-      <mat-card-subtitle>{{user.bio}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="http://localhost:3000/api/image/avatar?image_name={{user.image}}" alt="Avatar">
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>Email: {{user.email}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Password: {{user.password}} </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Created at: {{user.createdAt| date: 'MMM dd y'}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Update at: {{user.updateAt| date: 'MMM dd y'}}</mat-list-item>
+  <mat-card-header>
+    <img
+      mat-card-avatar
+      class="example-header-image"
+      src="http://localhost:3000/api/image/avatar?image_name={{ user.image }}"
+    />
+    <mat-card-title>{{ user.username }}</mat-card-title>
 
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="openDialogConvert(user)" mat-raised-button color="warn">Authorization</button>
-    </mat-card-actions>
-  </mat-card>
+    <mat-card-subtitle>{{ user.bio }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="http://localhost:3000/api/image/avatar?image_name={{ user.image }}"
+    alt="Avatar"
+  />
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>Email: {{ user.email }}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Password: {{ user.password }} </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item
+        >Created at: {{ user.createdAt | date: 'MMM dd y' }}</mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item
+        >Update at: {{ user.updateAt | date: 'MMM dd y' }}</mat-list-item
+      >
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="openDialogConvert(user)" mat-raised-button color="warn">
+      Authorization
+    </button>
+  </mat-card-actions>
+</mat-card>

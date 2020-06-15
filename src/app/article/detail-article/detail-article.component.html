@@ -3,7 +3,10 @@
     <div class="container">
       <div class="article-meta">
         <a (click)="navigate(articleDetail.author.username)"
-          ><img   src="http://localhost:3000/api/image/avatar?image_name={{articleDetail.author.image}}"
+          ><img
+            src="http://localhost:3000/api/image/avatar?image_name={{
+              articleDetail.author.image
+            }}"
         /></a>
         <div class="info">
           <a (click)="navigate(articleDetail.author.username)" class="author">{{
@@ -51,53 +54,117 @@
             &nbsp; Unfollow {{ articleDetail?.author.username }}
           </button>
           &nbsp;&nbsp;
-        
         </ng-container>
-        <label  class="rateCount">{{articleDetail.favoritesCount}}</label>
-        <div class="stars" >
+        <label class="rateCount">{{ articleDetail.favoritesCount }}</label>
+        <div class="stars">
           <ng-container *ngIf="articleDetail.favorited == 5">
-            <input  checked (click)="rate(5, articleDetail.slug)"class="star star-5" id="{{articleDetail.slug}}5" type="radio" name="{{articleDetail.slug}}"/>
-            <label  class="star star-5" for="{{articleDetail.slug}}5"></label>
+            <input
+              checked
+              (click)="rate(5, articleDetail.slug)"
+              class="star star-5"
+              id="{{ articleDetail.slug }}5"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-5" for="{{ articleDetail.slug }}5"></label>
           </ng-container>
           <ng-container *ngIf="articleDetail.favorited != 5">
-            <input (click)="rate(5, articleDetail.slug)"class="star star-5" id="{{articleDetail.slug}}5" type="radio" name="{{articleDetail.slug}}"/>
-            <label  class="star star-5" for="{{articleDetail.slug}}5"></label>
+            <input
+              (click)="rate(5, articleDetail.slug)"
+              class="star star-5"
+              id="{{ articleDetail.slug }}5"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-5" for="{{ articleDetail.slug }}5"></label>
           </ng-container>
-            <!-- 4 -->
+          <!-- 4 -->
           <ng-container *ngIf="articleDetail.favorited == 4">
-            <input checked  (click)="rate(4, articleDetail.slug)"class="star star-4" id="{{articleDetail.slug}}4" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-4" for="{{articleDetail.slug}}4"></label>
+            <input
+              checked
+              (click)="rate(4, articleDetail.slug)"
+              class="star star-4"
+              id="{{ articleDetail.slug }}4"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-4" for="{{ articleDetail.slug }}4"></label>
           </ng-container>
           <ng-container *ngIf="articleDetail.favorited != 4">
-            <input   (click)="rate(4, articleDetail.slug)"class="star star-4" id="{{articleDetail.slug}}4" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-4" for="{{articleDetail.slug}}4"></label>
+            <input
+              (click)="rate(4, articleDetail.slug)"
+              class="star star-4"
+              id="{{ articleDetail.slug }}4"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-4" for="{{ articleDetail.slug }}4"></label>
           </ng-container>
-            <!-- 3 -->
+          <!-- 3 -->
           <ng-container *ngIf="articleDetail.favorited == 3">
-            <input checked (click)="rate(3, articleDetail.slug)"class="star star-3" id="{{articleDetail.slug}}3" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-3" for="{{articleDetail.slug}}3"></label>
+            <input
+              checked
+              (click)="rate(3, articleDetail.slug)"
+              class="star star-3"
+              id="{{ articleDetail.slug }}3"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-3" for="{{ articleDetail.slug }}3"></label>
           </ng-container>
           <ng-container *ngIf="articleDetail.favorited != 3">
-            <input (click)="rate(3, articleDetail.slug)"class="star star-3" id="{{articleDetail.slug}}3" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-3" for="{{articleDetail.slug}}3"></label>
+            <input
+              (click)="rate(3, articleDetail.slug)"
+              class="star star-3"
+              id="{{ articleDetail.slug }}3"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-3" for="{{ articleDetail.slug }}3"></label>
           </ng-container>
-            <!-- 2 -->
+          <!-- 2 -->
           <ng-container *ngIf="articleDetail.favorited == 2">
-            <input checked (click)="rate(2, articleDetail.slug)"class="star star-2" id="{{articleDetail.slug}}2" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-2" for="{{articleDetail.slug}}2"></label>
+            <input
+              checked
+              (click)="rate(2, articleDetail.slug)"
+              class="star star-2"
+              id="{{ articleDetail.slug }}2"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-2" for="{{ articleDetail.slug }}2"></label>
           </ng-container>
           <ng-container *ngIf="articleDetail.favorited != 2">
-            <input (click)="rate(2, articleDetail.slug)"class="star star-2" id="{{articleDetail.slug}}2" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-2" for="{{articleDetail.slug}}2"></label>
+            <input
+              (click)="rate(2, articleDetail.slug)"
+              class="star star-2"
+              id="{{ articleDetail.slug }}2"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-2" for="{{ articleDetail.slug }}2"></label>
           </ng-container>
-            <!-- 1 -->
+          <!-- 1 -->
           <ng-container *ngIf="articleDetail.favorited == 1">
-            <input checked (click)="rate(1, articleDetail.slug)"class="star star-1" id="{{articleDetail.slug}}1" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-1" for="{{articleDetail.slug}}1"></label>
+            <input
+              checked
+              (click)="rate(1, articleDetail.slug)"
+              class="star star-1"
+              id="{{ articleDetail.slug }}1"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-1" for="{{ articleDetail.slug }}1"></label>
           </ng-container>
           <ng-container *ngIf="articleDetail.favorited != 1">
-            <input (click)="rate(1, articleDetail.slug)"class="star star-1" id="{{articleDetail.slug}}1" type="radio" name="{{articleDetail.slug}}"/>
-            <label class="star star-1" for="{{articleDetail.slug}}1"></label>
+            <input
+              (click)="rate(1, articleDetail.slug)"
+              class="star star-1"
+              id="{{ articleDetail.slug }}1"
+              type="radio"
+              name="{{ articleDetail.slug }}"
+            />
+            <label class="star star-1" for="{{ articleDetail.slug }}1"></label>
           </ng-container>
         </div>
       </div>
@@ -106,14 +173,14 @@
 
   <div class="container page">
     <span
-        class="tag-pill tag-default"
-        *ngFor="let item of articleDetail.tagList"
-      >
-        {{ item }}
-      </span>
-      <!-- neu co ca anh va video -->
+      class="tag-pill tag-default"
+      *ngFor="let item of articleDetail.tagList"
+    >
+      {{ item }}
+    </span>
+    <!-- neu co ca anh va video -->
     <div class="row article-content">
-      <ng-container *ngIf="articleDetail.video&&articleDetail.image">
+      <ng-container *ngIf="articleDetail.video && articleDetail.image">
         <div class="col-md-12">
           <p>
             {{ articleDetail.body }}
@@ -121,49 +188,73 @@
         </div>
         <div class="row">
           <div *ngIf="articleDetail.image" class="col-md-6">
-            <img width="100%" height="100%" src="http://localhost:3000/api/image?image_name={{articleDetail?.image}}">
+            <img
+              width="100%"
+              height="100%"
+              src="http://localhost:3000/api/image?image_name={{
+                articleDetail?.image
+              }}"
+            />
           </div>
           <div *ngIf="articleDetail.video" class="col-md-6">
-            <iframe width="560" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(getVideo())' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe
+              width="560"
+              height="315"
+              [src]="sanitizer.bypassSecurityTrustResourceUrl(getVideo())"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
       </ng-container>
       <!-- neu chi co anh ko co video -->
-      <ng-container *ngIf="!articleDetail.video&&articleDetail.image">
+      <ng-container *ngIf="!articleDetail.video && articleDetail.image">
         <div class="col-md-6">
           <p>
             {{ articleDetail.body }}
           </p>
         </div>
         <div *ngIf="articleDetail.image" class="col-md-6">
-          <img width="100%" height="100%" src="http://localhost:3000/api/image?image_name={{articleDetail?.image}}">
+          <img
+            width="100%"
+            height="100%"
+            src="http://localhost:3000/api/image?image_name={{
+              articleDetail?.image
+            }}"
+          />
         </div>
       </ng-container>
       <!-- neu chi co video ko co anh -->
-      <ng-container *ngIf="articleDetail.video&&!articleDetail.image">
+      <ng-container *ngIf="articleDetail.video && !articleDetail.image">
         <div class="col-md-6">
           <p>
             {{ articleDetail.body }}
           </p>
         </div>
         <div *ngIf="articleDetail.video" class="col-md-6">
-          <iframe width="560" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(getVideo())' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe
+            width="560"
+            height="315"
+            [src]="sanitizer.bypassSecurityTrustResourceUrl(getVideo())"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
       </ng-container>
       <!-- neu khong co anh cung khong co video -->
-      <ng-container *ngIf="!articleDetail.video&&!articleDetail.image">
+      <ng-container *ngIf="!articleDetail.video && !articleDetail.image">
         <div class="col-md-12">
           <p>
             {{ articleDetail.body }}
           </p>
         </div>
       </ng-container>
-        
     </div>
 
     <hr />
 
-   
     <div class="container" *ngIf="isAuthenticated == false">
       <p>
         <a routerLink="/auth/login">Sign in</a> or
@@ -188,7 +279,12 @@
             ></textarea>
           </div>
           <div class="card-footer">
-            <img src="http://localhost:3000/api/image/avatar?image_name={{userCurrent?.image}}" class="comment-author-img" />
+            <img
+              src="http://localhost:3000/api/image/avatar?image_name={{
+                userCurrent?.image
+              }}"
+              class="comment-author-img"
+            />
             <button
               class="btn btn-sm btn-info"
               (click)="postComment(comment.value)"
@@ -206,7 +302,12 @@
           </div>
           <div class="card-footer">
             <a href="" class="comment-author">
-              <img src="http://localhost:3000/api/image/avatar?image_name={{ item?.author?.image }}" class="comment-author-img" />
+              <img
+                src="http://localhost:3000/api/image/avatar?image_name={{
+                  item?.author?.image
+                }}"
+                class="comment-author-img"
+              />
             </a>
             &nbsp;
             <a

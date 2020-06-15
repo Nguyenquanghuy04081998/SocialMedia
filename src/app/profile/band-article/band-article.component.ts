@@ -36,24 +36,27 @@ export class BandArticleComponent implements OnInit {
     this.getArticle();
   }
   getArticle() {
-    this.userService.getCurrentUser().subscribe(e=>{
-      if(e.user.username == this.apiService.namePath){
+    this.userService.getCurrentUser().subscribe(e => {
+      if (e.user.username == this.apiService.namePath) {
         this.check = true;
-        this.apiService.get('/articles',this.apiService.namePath).subscribe(data => {
-          this.listFavorite = data.articles.filter(e=>e.checked==false);
-          if (this.listFavorite) {
-            this.error = false;
-          }
-          if (this.listFavorite.length === 0 || this.listFavorite === undefined) {
-            this.error = true;
-          }
-      }); 
-      }
-      else {
+        this.apiService
+          .get('/articles', this.apiService.namePath)
+          .subscribe(data => {
+            this.listFavorite = data.articles.filter(e => e.checked == false);
+            if (this.listFavorite) {
+              this.error = false;
+            }
+            if (
+              this.listFavorite.length === 0 ||
+              this.listFavorite === undefined
+            ) {
+              this.error = true;
+            }
+          });
+      } else {
         this.check = false;
       }
-    })
-    
+    });
   }
   navigate(username) {
     this.router.navigate(['profile', username]);
@@ -62,16 +65,12 @@ export class BandArticleComponent implements OnInit {
     this.router.navigate(['article', url]);
   }
 
-  openDialog(post){
-    const dialogConfig  = new MatDialogConfig();
+  openDialog(post) {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.data = post;
     dialogConfig.height = '50%';
     dialogConfig.width = '50%';
-    
-    const dialogRef = this.dialog.open(DetailBandComponent,dialogConfig);
 
-   
-    
+    const dialogRef = this.dialog.open(DetailBandComponent, dialogConfig);
   }
-
 }

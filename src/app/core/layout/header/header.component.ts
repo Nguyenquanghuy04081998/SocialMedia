@@ -12,12 +12,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor( private router: Router,private userService: UserService, private profileService: ProfileService, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private profileService: ProfileService,
+    private apiService: ApiService
+  ) {}
   isActive;
   userActive: User;
   profile;
   allProfile;
-  checked= false;
+  checked = false;
   ngOnInit(): void {
     this.userService.currentUser.subscribe(userData => {
       this.userActive = userData;
@@ -25,20 +30,20 @@ export class HeaderComponent implements OnInit {
     this.userService.isAuthenticated.subscribe(isActive => {
       this.isActive = isActive;
     });
-    this.apiService.get('/users/all').subscribe(data=>{
+    this.apiService.get('/users/all').subscribe(data => {
       this.allProfile = data.user;
-      
-    })
+    });
   }
-  search(value){
-    this.checked=true;
-    this.profile =this.allProfile.filter(e=>e.username.toLowerCase().indexOf(value.toLowerCase())!==-1);
-    if(value==''){
+  search(value) {
+    this.checked = true;
+    this.profile = this.allProfile.filter(
+      e => e.username.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+    if (value == '') {
       this.checked = false;
     }
-    
   }
-  viewProfile(name){
+  viewProfile(name) {
     this.checked = false;
     this.router.navigateByUrl('/profile/' + name);
   }

@@ -1,3 +1,13 @@
 <h1>Reason why the post has not been approved or banned</h1>
-<p style="color: red; margin-top: 20px; text-align: center; margin-top: 50px;" *ngIf="post.adminChecked">{{post.adminChecked}}</p>
-<p style="color: red; margin-top: 20px; text-align: center; margin-top: 50px;" *ngIf="!post.adminChecked||post.adminChecked==''">The admin has not browsed your post yet. Please wait for admin to moderate!</p>
+<p
+  style="color: red; margin-top: 20px; text-align: center; margin-top: 50px;"
+  *ngIf="post.adminChecked"
+>
+  {{ post.adminChecked }}
+</p>
+<p
+  style="color: red; margin-top: 20px; text-align: center; margin-top: 50px;"
+  *ngIf="!post.adminChecked || post.adminChecked == ''"
+>
+  The admin has not browsed your post yet. Please wait for admin to moderate!
+</p>

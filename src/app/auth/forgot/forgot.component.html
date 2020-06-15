@@ -1,9 +1,16 @@
 <!-- <h1>Forgotten account?</h1>-->
-<h4 style="color: brown;" *ngIf="error">{{error}}</h4>
+<h4 style="color: brown;" *ngIf="error">{{ error }}</h4>
 <h2 mat-dialog-title>Forgotten account?</h2>
 <div style="margin-bottom: 40px;" class="input-group input-group-lg">
   <span class="input-group-addon">@</span>
-  <input #input type="text" class="form-control" placeholder="Your email">
-  <button style="margin-left: 20px;" (click)="submit(input.value)" mat-raised-button color="primary">Submit</button>
-</div> 
+  <input #input type="text" class="form-control" placeholder="Your email" />
+  <button
+    style="margin-left: 20px;"
+    (click)="submit(input.value)"
+    mat-raised-button
+    color="primary"
+  >
+    Submit
+  </button>
+</div>
 <button mat-button mat-dialog-close (click)="close()">Cancel</button>

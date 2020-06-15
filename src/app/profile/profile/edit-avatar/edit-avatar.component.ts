@@ -8,14 +8,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EditAvatarComponent implements OnInit {
   user;
-  constructor(private dialogRef: MatDialogRef<EditAvatarComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
+  constructor(
+    private dialogRef: MatDialogRef<EditAvatarComponent>,
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
     this.user = data;
-    }
+  }
 
   ngOnInit(): void {
     console.log(this.user);
-    
   }
-
 }

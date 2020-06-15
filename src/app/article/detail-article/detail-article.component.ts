@@ -53,8 +53,8 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
     this.resetComment();
   }
 
-  getVideo(){
-    return 'https://www.youtube.com/embed/'+this.articleDetail.video;
+  getVideo() {
+    return 'https://www.youtube.com/embed/' + this.articleDetail.video;
   }
 
   getArticleDetail() {
@@ -74,7 +74,6 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
           });
         }
         this.articleDetail = data.articles;
-
       });
   }
   ngOnDestroy(): void {
@@ -85,14 +84,16 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
     this.commentVal = newComment;
     this.commentService
       .postComment(this.slug, { comment: { body: newComment } })
-      .subscribe(newDataComment => {
-        this.comments.unshift(newDataComment);
-        this.resetComment();
-        this.commentVal = '';
-      },
-      err=>{
-        this.error = err.error.error;
-      });
+      .subscribe(
+        newDataComment => {
+          this.comments.unshift(newDataComment);
+          this.resetComment();
+          this.commentVal = '';
+        },
+        err => {
+          this.error = err.error.error;
+        }
+      );
   }
 
   resetComment() {
@@ -150,16 +151,16 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
   navigate(username) {
     this.router.navigate(['profile', username]);
   }
-   rate(rate, slug){
-    
-    this.subscribe = this.apiService.post(`/articles/${slug}/${rate}/favorite`).subscribe( data => {
-       this.getArticleDetail();
-       this.resetComment();
-    });
+  rate(rate, slug) {
+    this.subscribe = this.apiService
+      .post(`/articles/${slug}/${rate}/favorite`)
+      .subscribe(data => {
+        this.getArticleDetail();
+        this.resetComment();
+      });
     if (!this.isAuthenticated) {
       this.router.navigateByUrl('/auth/login');
       return;
     }
-    
   }
 }

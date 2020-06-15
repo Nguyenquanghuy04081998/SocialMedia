@@ -19,8 +19,7 @@ const routes: Routes = [
     canActivate: [EditCanActiveGuard],
     canDeactivate: [SettingDeactiveGuard]
   },
-  {path: 'forgot', component: ForgotComponent}
-  ,
+  { path: 'forgot', component: ForgotComponent },
   { path: '**', component: NotfoundComponent }
 ];
 

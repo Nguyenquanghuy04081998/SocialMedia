@@ -24,7 +24,13 @@
                 value="{{ userCurrent?.image }}"
               />
             </fieldset> -->
-            <input  class="custom-file" (change)="selectImage($event)" multiple  id="file" type="file"/>
+            <input
+              class="custom-file"
+              (change)="selectImage($event)"
+              multiple
+              id="file"
+              type="file"
+            />
             <fieldset class="form-group">
               <input
                 formControlName="username"

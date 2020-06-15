@@ -12,7 +12,7 @@ export interface Article {
   favorited: number;
   favoritesCount: number;
   author: Profile;
-  image: string,
-  video: string,
-  adminChecked:string
+  image: string;
+  video: string;
+  adminChecked: string;
 }

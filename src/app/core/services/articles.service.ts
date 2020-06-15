@@ -19,7 +19,6 @@ export class ArticlesService {
       return this.apiService.post('/articles', obj);
     }
   }
- 
 
   deleteArticle(slug): Observable<any> {
     return this.apiService.delete(`/articles/${slug}`);

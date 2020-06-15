@@ -36,9 +36,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscribeUserName = this.route.params.subscribe(user => {
       this.userName = user.username;
-      setTimeout( ()=>{
+      setTimeout(() => {
         this.resetProfile();
-      },1000)
+      }, 1000);
     });
 
     this.setUserName(this.userName);
@@ -60,7 +60,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   unFollow() {
-    
     this.subcribeUnFollow = this.profileService
       .unfollow(this.userName)
       .subscribe(() => {
@@ -69,18 +68,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   resetProfile() {
-    
-      this.subscribeProfile = this.profileService
-        .getProfile(this.userName)
-        .subscribe(
-          profile => {
-          
-            this.profile = profile.user;
-            
-            
-          },
-          err => this.router.navigate(['notfound'])
-        );
+    this.subscribeProfile = this.profileService
+      .getProfile(this.userName)
+      .subscribe(
+        profile => {
+          this.profile = profile.user;
+        },
+        err => this.router.navigate(['notfound'])
+      );
   }
 
   setUserName(namePath) {
@@ -108,12 +103,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.subscribeProfile.unsubscribe();
     }
   }
-  changeAvatar(user){
-    const dialogConfig  = new MatDialogConfig();
+  changeAvatar(user) {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
     dialogConfig.width = '500px';
     dialogConfig.height = '500px';
-    const dialogRef = this.dialog.open(EditAvatarComponent,dialogConfig);
+    const dialogRef = this.dialog.open(EditAvatarComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       this.resetProfile();

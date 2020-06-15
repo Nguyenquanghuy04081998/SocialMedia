@@ -56,31 +56,34 @@ export class SettingComponent implements OnInit, OnDestroy {
       this.form.value.password = this.jwtService.getPassword();
     }
     console.log(this.form.value.password);
-    
+
     this.subscribe = this.apiService
       .put(`/users`, { user: this.form.value })
       .subscribe(
         data => {
           if (this.image) {
             const formData = new FormData();
-            formData.append("file", this.image);
+            formData.append('file', this.image);
             this.apiService
-              .postImage("/image/upload_avatar", formData)
+              .postImage('/image/upload_avatar', formData)
               .subscribe(res => {
                 const data = {
                   id_user: this.userCurrent._id,
                   name_image: res.filename
                 };
                 this.apiService
-                  .post("/image/editAvatar", { data: data })
+                  .post('/image/editAvatar', { data: data })
                   .subscribe(async e => {
-                  console.log(e);
-                  
-                    this.router.navigate(['/profile', this.form.value.username]);
+                    console.log(e);
+
+                    this.router.navigate([
+                      '/profile',
+                      this.form.value.username
+                    ]);
                   }),
                   err => console.log(err);
-              })
-          } 
+              });
+          }
           this.router.navigate(['/profile', this.form.value.username]);
           this.userService.currentUserSubject.next(data.user);
         },
@@ -106,6 +109,5 @@ export class SettingComponent implements OnInit, OnDestroy {
       this.image = event.target.files[0];
     }
     console.log(this.image);
-    
   }
 }

@@ -11,18 +11,20 @@ import { ApiService } from 'src/app/core/services/api.service';
 export class AdminComponent implements OnInit {
   userAdmin;
   // length;
-  constructor( private userService: UserService, private router: Router, private apiService: ApiService) {
-  }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe(e=>{
-      this.userAdmin=e.user;
+    this.userService.getCurrentUser().subscribe(e => {
+      this.userAdmin = e.user;
     });
     // this.apiService.get('/users/all').subscribe(e=>{this.length=e.user.filter(e=>e.forgot==true).length;
     // })
-    
   }
-  
+
   logOut() {
     const result = confirm('Are you sure to prohibit?!');
     if (result === true) {
@@ -30,5 +32,4 @@ export class AdminComponent implements OnInit {
       this.router.navigateByUrl('/auth/login');
     }
   }
-
 }

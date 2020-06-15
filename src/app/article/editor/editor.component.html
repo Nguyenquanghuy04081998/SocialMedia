@@ -65,7 +65,14 @@
               </div>
             </fieldset>
             <fieldset class="form-group">
-              <i class="fas fa-image"></i><input  class="custom-file" (change)="selectImage($event)" multiple  id="file" type="file"/>
+              <i class="fas fa-image"></i
+              ><input
+                class="custom-file"
+                (change)="selectImage($event)"
+                multiple
+                id="file"
+                type="file"
+              />
             </fieldset>
             <fieldset class="form-group">
               <input
@@ -74,9 +81,14 @@
                 type="text"
                 class="form-control"
                 placeholder="Id video"
-                
               />
-              <a (click)="openDialog()" mat-button color="warn"><i style="color: crimson; margin-right: 10px;" class="fas fa-arrow-right"></i>Instruction to upload videos!</a>
+              <a (click)="openDialog()" mat-button color="warn"
+                ><i
+                  style="color: crimson; margin-right: 10px;"
+                  class="fas fa-arrow-right"
+                ></i
+                >Instruction to upload videos!</a
+              >
             </fieldset>
             <fieldset class="form-group">
               <input
@@ -179,29 +191,54 @@
               </div>
             </fieldset>
             <fieldset class="form-group">
-              <div *ngIf="imageEditor" class="img"><img width="100% " src ="http://localhost:3000/api/image?image_name={{articleEdit?.image}}">
-             <i  (click)="deleteImage()" class="fas fa-times icon"></i>
-            </div>
-              <input  class="custom-file" (change)="selectImage($event)" multiple  id="file" type="file"/>
+              <div *ngIf="imageEditor" class="img">
+                <img
+                  width="100% "
+                  src="http://localhost:3000/api/image?image_name={{
+                    articleEdit?.image
+                  }}"
+                />
+                <i (click)="deleteImage()" class="fas fa-times icon"></i>
+              </div>
+              <input
+                class="custom-file"
+                (change)="selectImage($event)"
+                multiple
+                id="file"
+                type="file"
+              />
             </fieldset>
             <fieldset class="form-group">
-            <div *ngIf="articleEdit?.video" class="col-md-6">
-              <iframe width="100%" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(getVideo())' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <i (click)="deleteVideo()" class="fas fa-times icon"></i>
-            </div>
-                <fieldset class="form-group">
-                  <input
-                    name="video"
-                    formControlName="video"
-                    type="text"
-                    class="form-control"
-                    placeholder="id video"
-                    [value]="articleEdit?.video"
-                  />
-                  <a (click)="openDialog()" mat-button color="warn"><i style="color: crimson; margin-right: 10px;" class="fas fa-arrow-right"></i>Instruction to upload videos!</a>
-                  </fieldset>
-          </fieldset>
-           
+              <div *ngIf="articleEdit?.video" class="col-md-6">
+                <iframe
+                  width="100%"
+                  height="315"
+                  [src]="sanitizer.bypassSecurityTrustResourceUrl(getVideo())"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+                <i (click)="deleteVideo()" class="fas fa-times icon"></i>
+              </div>
+              <fieldset class="form-group">
+                <input
+                  name="video"
+                  formControlName="video"
+                  type="text"
+                  class="form-control"
+                  placeholder="id video"
+                  [value]="articleEdit?.video"
+                />
+                <a (click)="openDialog()" mat-button color="warn"
+                  ><i
+                    style="color: crimson; margin-right: 10px;"
+                    class="fas fa-arrow-right"
+                  ></i
+                  >Instruction to upload videos!</a
+                >
+              </fieldset>
+            </fieldset>
+
             <fieldset class="form-group">
               <input
                 type="text"

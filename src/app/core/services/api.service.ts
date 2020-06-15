@@ -41,7 +41,7 @@ export class ApiService {
 
   post(path: string, data?: object, image?): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${API}${path}`, JSON.stringify(data),{headers});
+    return this.http.post(`${API}${path}`, JSON.stringify(data), { headers });
   }
   postImage(path: string, data?: object): Observable<any> {
     console.log(data);
@@ -49,7 +49,7 @@ export class ApiService {
   }
   put(path: string, body: object = {}): Observable<any> {
     console.log(body);
-    
+
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(`${API}${path}`, JSON.stringify(body), {
       headers
@@ -58,7 +58,7 @@ export class ApiService {
 
   delete(path: string, token?): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete(`${API}${path}`, token,);
+    return this.http.delete(`${API}${path}`, token);
   }
 
   setUserName(name) {

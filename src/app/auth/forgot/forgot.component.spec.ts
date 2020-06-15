@@ -8,9 +8,8 @@ describe('ForgotComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForgotComponent ]
-    })
-    .compileComponents();
+      declarations: [ForgotComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

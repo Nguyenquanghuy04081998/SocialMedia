@@ -1,39 +1,71 @@
-
 <div class="row" *ngIf="userAdmin?.admin">
-    <div class="col-md-2 left">
-        <div class="profile-sidebar">
-			<div class="profile-userpic">
-				<img src="http://localhost:3000/api/image/avatar?image_name={{userAdmin.image}}" class="img-responsive" alt="">
-			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">{{userAdmin.username}}</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-		
-		<div class="list-group">
-			<button routerLinkActive="active" routerLink="home" type="button" class="list-group-item list-group-item-action">
-				<i class="fas fa-home"></i>Home
-			</button>
-			<button routerLinkActive="active" routerLink="accounts" type="button" class="list-group-item list-group-item-action"><i class="fas fa-users-cog"></i>Users management<!-- <i *ngIf="length!=0" style="color: red; margin-left: 5px; " class="fas fa-exclamation important"></i> --></button>
-			<div class="dropdown">
-				<button routerLinkActive="active" routerLink="posts" class="dropbtn "><i class="fas fa-users-cog"></i> Posts management</button>
-				<div class="dropdown-content">
-				  <a href="#" routerLinkActive="active" routerLink="appreciated">Posts are appreciated</a>
-				  <a href="#"routerLinkActive="active" routerLink="average">Posts are rated average</a>
-				  <a href="#" routerLinkActive="active" routerLink="poorly">Posts are poorly rated</a>
-				</div>
-			  </div>
-			
-			<button (click)="logOut()" type="button" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt"></i>Logout</button>
-		</div>
+  <div class="col-md-2 left">
+    <div class="profile-sidebar">
+      <div class="profile-userpic">
+        <img
+          src="http://localhost:3000/api/image/avatar?image_name={{
+            userAdmin.image
+          }}"
+          class="img-responsive"
+          alt=""
+        />
+      </div>
+      <div class="profile-usertitle">
+        <div class="profile-usertitle-name">{{ userAdmin.username }}</div>
+        <div class="profile-usertitle-status">
+          <span class="indicator label-success"></span>Online
+        </div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="col-md-10 right">
-		<router-outlet></router-outlet>
-	</div>
-	
+
+    <div class="list-group">
+      <button
+        routerLinkActive="active"
+        routerLink="home"
+        type="button"
+        class="list-group-item list-group-item-action"
+      >
+        <i class="fas fa-home"></i>Home
+      </button>
+      <button
+        routerLinkActive="active"
+        routerLink="accounts"
+        type="button"
+        class="list-group-item list-group-item-action"
+      >
+        <i class="fas fa-users-cog"></i>Users management<!-- <i *ngIf="length!=0" style="color: red; margin-left: 5px; " class="fas fa-exclamation important"></i> -->
+      </button>
+      <div class="dropdown">
+        <button routerLinkActive="active" routerLink="posts" class="dropbtn ">
+          <i class="fas fa-users-cog"></i> Posts management
+        </button>
+        <div class="dropdown-content">
+          <a href="#" routerLinkActive="active" routerLink="appreciated"
+            >Posts are appreciated</a
+          >
+          <a href="#" routerLinkActive="active" routerLink="average"
+            >Posts are rated average</a
+          >
+          <a href="#" routerLinkActive="active" routerLink="poorly"
+            >Posts are poorly rated</a
+          >
+        </div>
+      </div>
+
+      <button
+        (click)="logOut()"
+        type="button"
+        class="list-group-item list-group-item-action"
+      >
+        <i class="fas fa-sign-out-alt"></i>Logout
+      </button>
+    </div>
+  </div>
+  <div class="col-md-10 right">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<h1 *ngIf="userAdmin?.admin==false">
-	You do not have this authority!
+<h1 *ngIf="userAdmin?.admin == false">
+  You do not have this authority!
 </h1>

@@ -8,9 +8,8 @@ describe('DetaiPostComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetaiPostComponent ]
-    })
-    .compileComponents();
+      declarations: [DetaiPostComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

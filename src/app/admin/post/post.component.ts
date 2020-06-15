@@ -12,86 +12,85 @@ import { AdminCommentComponent } from './admin-comment/admin-comment.component';
 export class PostComponent implements OnInit {
   posts;
   select;
-  checked= false;
-  constructor(private apiService:ApiService,public dialog: MatDialog) { }
+  checked = false;
+  constructor(private apiService: ApiService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.reset();
   }
-  getSelect(value){
+  getSelect(value) {
     this.checked = true;
-    if(value=='Checked'){
-      this.resetChecked()
+    if (value == 'Checked') {
+      this.resetChecked();
     }
-    if(value=='Unchecked'){
-      this.resetUnChecked()
+    if (value == 'Unchecked') {
+      this.resetUnChecked();
     }
-    if(value =='Choose...') {
+    if (value == 'Choose...') {
       this.checked = false;
       this.reset();
     }
   }
 
-  accrept(slug){
+  accrept(slug) {
     const result = confirm('Are you sure to accrept?!');
     if (result === true) {
-      this.apiService.post(`/articles/${slug}/checked`).subscribe(e=>{
+      this.apiService.post(`/articles/${slug}/checked`).subscribe(e => {
         this.resetUnChecked();
         this.reset();
-      })
+      });
     }
     return;
   }
-  search(value){
+  search(value) {
     this.checked = true;
-    this.select =this.posts.filter(e=>e.author.username.toLowerCase().indexOf(value.toLowerCase())!==-1);
-    if(value==''){
+    this.select = this.posts.filter(
+      e => e.author.username.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+    if (value == '') {
       this.checked = false;
     }
   }
-  prohibit(slug){
-    const dialogConfig  = new MatDialogConfig();
+  prohibit(slug) {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.data = slug;
     dialogConfig.height = '50%';
     dialogConfig.width = '50%';
-    
-    const dialogRef = this.dialog.open(AdminCommentComponent,dialogConfig);
+
+    const dialogRef = this.dialog.open(AdminCommentComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       this.resetChecked();
       this.reset();
     });
-    
   }
 
   openDialog(post) {
-    const dialogConfig  = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.data = post;
-    if(post.video||post.image) dialogConfig.height = '800px';
+    if (post.video || post.image) dialogConfig.height = '800px';
     else dialogConfig.height = '400px';
     dialogConfig.width = '660px';
-    
-    const dialogRef = this.dialog.open(DetaiPostComponent,dialogConfig);
+
+    const dialogRef = this.dialog.open(DetaiPostComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       this.reset();
     });
-
   }
-  resetChecked(){
-    this.apiService.get('/articles').subscribe(data=>{
-      this.select = data.articles.filter(e=>e.checked == true);
-    })
+  resetChecked() {
+    this.apiService.get('/articles').subscribe(data => {
+      this.select = data.articles.filter(e => e.checked == true);
+    });
   }
-  resetUnChecked(){
-    this.apiService.get('/articles').subscribe(data=>{
-      this.select = data.articles.filter(e=>e.checked == false);
-    })
+  resetUnChecked() {
+    this.apiService.get('/articles').subscribe(data => {
+      this.select = data.articles.filter(e => e.checked == false);
+    });
   }
-  reset(){
-    this.apiService.get('/articles').subscribe(data=>{
+  reset() {
+    this.apiService.get('/articles').subscribe(data => {
       this.posts = data.articles;
-    })
+    });
   }
-
 }

@@ -46,10 +46,10 @@ input::placeholder {
   background: transparent;
   color: aqua;
 }
-.form-control{
+.form-control {
   color: azure;
 }
-.error-messages{
+.error-messages {
   background-color: white;
   border-radius: 5px;
 }

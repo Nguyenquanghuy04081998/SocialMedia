@@ -8,9 +8,8 @@ describe('PoorlyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoorlyComponent ]
-    })
-    .compileComponents();
+      declarations: [PoorlyComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

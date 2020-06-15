@@ -47,11 +47,11 @@ input::placeholder {
   background: transparent;
   color: rgb(43, 155, 155);
 }
-.img{
+.img {
   position: relative;
   width: 50%;
 }
-.icon{
+.icon {
   position: absolute;
   top: 0;
   right: 0;
@@ -59,9 +59,8 @@ input::placeholder {
   font-size: 2rem;
   background-color: white;
 }
-.icon:hover{
+.icon:hover {
   color: brown;
   font-size: 2.5rem;
   transition: 0.5s;
 }
-

@@ -8,9 +8,8 @@ describe('AverageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AverageComponent ]
-    })
-    .compileComponents();
+      declarations: [AverageComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

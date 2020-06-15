@@ -1,21 +1,34 @@
 <ng-container *ngIf="check">
-<p *ngIf="error" style="margin-top: 20px; color: brown;">
+  <p *ngIf="error" style="margin-top: 20px; color: brown;">
     No article are here...yet.
   </p>
   <div class="article-preview" *ngFor="let article of listFavorite">
     <div class="article-meta">
       <a (click)="navigate(article.author.username)"
-        ><img   src="http://localhost:3000/api/image/avatar?image_name={{article.author.image}}"
+        ><img
+          src="http://localhost:3000/api/image/avatar?image_name={{
+            article.author.image
+          }}"
       /></a>
       <div class="info">
         <a (click)="navigate(article.author.username)" class=" author">{{
           article.author.username
         }}</a>
         <span class="date">{{ article.createdAt | date: 'MMM dd y' }}</span>
-      </div><i style="color: red; font-weight: bold; font-size: 2rem;" class="fas fa-ban"></i>
-    
+      </div>
+      <i
+        style="color: red; font-weight: bold; font-size: 2rem;"
+        class="fas fa-ban"
+      ></i>
     </div>
-    <button (click)="openDialog(article)" style="float: right;" mat-raised-button color="warn">Detail</button>
+    <button
+      (click)="openDialog(article)"
+      style="float: right;"
+      mat-raised-button
+      color="warn"
+    >
+      Detail
+    </button>
     <a (click)="navigateDetail(article.slug)" class="preview-link">
       <h1 class="ellipsis">{{ article.title }}</h1>
       <p class="ellipsis">{{ article.description }}</p>
@@ -31,9 +44,8 @@
     </a>
   </div>
 </ng-container>
-<ng-container *ngIf="check==false">
+<ng-container *ngIf="check == false">
   <p style="margin-top: 20px; color: brown;">
     You do not have permission to view this item!
   </p>
 </ng-container>
-  
