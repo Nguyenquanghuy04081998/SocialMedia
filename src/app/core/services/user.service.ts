@@ -35,7 +35,7 @@ export class UserService {
   resovleAuth(type, dataUser): Observable<User> {
     const route = type === 'login' ? '/login' : '';
     this.jwtService.savePassWord(dataUser.password);
-    if (type == 'login') {
+    if (type === 'login') {
       delete dataUser.username;
     }
     return this.apiService.post('/users' + route, { user: dataUser }).pipe(

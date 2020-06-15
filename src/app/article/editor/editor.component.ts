@@ -54,7 +54,7 @@ export class EditorComponent implements OnInit {
           .subscribe(dataArticleEdit => {
             this.articleEdit = dataArticleEdit.articles;
             this.article.tagList = this.articleEdit.tagList;
-            if (this.articleEdit.image) this.imageEditor = true;
+            if (this.articleEdit.image) { this.imageEditor = true; }
           });
       } else {
         this.checkType = false;
@@ -122,13 +122,12 @@ export class EditorComponent implements OnInit {
                   name_image: res.filename
                 };
                 this.apiService
-                  .post('/image/editImage', { data: data })
+                  .post('/image/editImage', { data })
                   .subscribe(e => {
                     this.router.navigateByUrl(
                       '/article/' + article.article.slug
                     );
-                  }),
-                  err => console.log(err);
+                  });
               });
           } else {
             this.router.navigateByUrl('/article/' + article.article.slug);
@@ -141,7 +140,7 @@ export class EditorComponent implements OnInit {
     return (this.checkCandiactive = true);
   }
   getVideo() {
-    if (this.articleEdit.video != '') {
+    if (this.articleEdit.video !== '') {
       return 'https://www.youtube.com/embed/' + this.articleEdit.video;
     }
   }
@@ -152,7 +151,7 @@ export class EditorComponent implements OnInit {
       name_image: ''
     };
     this.apiService
-      .post('/image/delete', { data: data })
+      .post('/image/delete', { data })
       .subscribe(e => console.log(e));
   }
   deleteVideo() {

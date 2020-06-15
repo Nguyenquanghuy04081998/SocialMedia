@@ -19,31 +19,31 @@ export class AccountComponent implements OnInit {
   users;
   select;
   checked = false;
-  length;
-  userForgot;
+  // length;
+  // userForgot;
   displayedColumns = ['username'];
   constructor(private apiService: ApiService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.reset();
-    this.apiService.get('/users/all').subscribe(e => {
-      this.userForgot = e.user.filter(e => e.forgot == true);
-      this.length = this.userForgot.length;
-    });
+    // this.apiService.get('/users/all').subscribe(e => {
+    //   this.userForgot = e.user.filter(user => e.forgot == true);
+    //   this.length = this.userForgot.length;
+    // });
   }
 
   getSelect(value) {
     this.checked = true;
-    if (value == 'active') {
-      this.select = this.users.filter(e => e.active == false);
+    if (value === 'active') {
+      this.select = this.users.filter(user => user.active === false);
     }
-    if (value == 'posting') {
-      this.select = this.users.filter(e => e.canPost == false);
+    if (value === 'posting') {
+      this.select = this.users.filter(user => user.canPost === false);
     }
-    if (value == 'comment') {
-      this.select = this.users.filter(e => e.canComment == false);
+    if (value === 'comment') {
+      this.select = this.users.filter(user => user.canComment === false);
     }
-    if (value == 'Choose...') {
+    if (value === 'Choose...') {
       this.checked = false;
       this.reset();
     }
@@ -81,7 +81,7 @@ export class AccountComponent implements OnInit {
     this.select = this.users.filter(
       e => e.email.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
-    if (value == '') {
+    if (value === '') {
       this.checked = false;
     }
   }

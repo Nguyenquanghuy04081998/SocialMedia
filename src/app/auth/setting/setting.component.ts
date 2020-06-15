@@ -60,7 +60,7 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.subscribe = this.apiService
       .put(`/users`, { user: this.form.value })
       .subscribe(
-        data => {
+        dataUser => {
           if (this.image) {
             const formData = new FormData();
             formData.append('file', this.image);
@@ -72,7 +72,7 @@ export class SettingComponent implements OnInit, OnDestroy {
                   name_image: res.filename
                 };
                 this.apiService
-                  .post('/image/editAvatar', { data: data })
+                  .post('/image/editAvatar', { data })
                   .subscribe(async e => {
                     console.log(e);
 
@@ -80,16 +80,14 @@ export class SettingComponent implements OnInit, OnDestroy {
                       '/profile',
                       this.form.value.username
                     ]);
-                  }),
-                  err => console.log(err);
+                  });
               });
           }
           this.router.navigate(['/profile', this.form.value.username]);
-          this.userService.currentUserSubject.next(data.user);
+          this.userService.currentUserSubject.next(dataUser.user);
         },
         err => {
           this.errors = err?.error?.errors;
-          console.log(this.errors);
         }
       );
     return (this.checkCandiactive = true);

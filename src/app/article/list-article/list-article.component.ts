@@ -74,7 +74,7 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
       .get('/articles', this.namePath, '20')
       .subscribe(listArticle => {
         this.articleListFilter = listArticle.articles.filter(
-          e => e.checked == true
+          e => e.checked === true
         );
         if (this.articleListFilter) {
           this.error = false;
@@ -103,14 +103,14 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(listArticle => {
         if (listArticle) {
           this.articleList = listArticle.articles.filter(
-            e => e.checked == true
+            e => e.checked === true
           );
           this.errorFeed = false;
         }
         // if (listArticle.articles.length === 0 || listArticle.articles === undefined) {
         if (
           listArticle.articles === undefined ||
-          listArticle.articles.length == 0
+          listArticle.articles.length === 0
         ) {
           this.errorFeed = true;
         }

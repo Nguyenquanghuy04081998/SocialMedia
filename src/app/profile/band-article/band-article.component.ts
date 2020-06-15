@@ -37,12 +37,12 @@ export class BandArticleComponent implements OnInit {
   }
   getArticle() {
     this.userService.getCurrentUser().subscribe(e => {
-      if (e.user.username == this.apiService.namePath) {
+      if (e.user.username === this.apiService.namePath) {
         this.check = true;
         this.apiService
           .get('/articles', this.apiService.namePath)
           .subscribe(data => {
-            this.listFavorite = data.articles.filter(e => e.checked == false);
+            this.listFavorite = data.articles.filter(article => article.checked === false);
             if (this.listFavorite) {
               this.error = false;
             }

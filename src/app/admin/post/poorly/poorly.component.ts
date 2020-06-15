@@ -31,8 +31,7 @@ export class PoorlyComponent implements OnInit {
   openDialog(post) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = post;
-    if (post.video || post.image) dialogConfig.height = '800px';
-    else dialogConfig.height = '400px';
+    if (post.video || post.image) { dialogConfig.height = '800px'; } else { dialogConfig.height = '400px'; }
     dialogConfig.width = '660px';
 
     const dialogRef = this.dialog.open(DetaiPostComponent, dialogConfig);
@@ -44,16 +43,16 @@ export class PoorlyComponent implements OnInit {
   search(value) {
     this.checked = true;
     this.select = this.posts.filter(
-      e => e.author.username.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      aritcle => aritcle.author.username.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
-    if (value == '') {
+    if (value === '') {
       this.checked = false;
     }
   }
   reset() {
     this.apiService.get('/articles').subscribe(data => {
       this.posts = data.articles.filter(
-        e => e.favoritesCount < 2 && e.checked == true
+        aritcle => aritcle.favoritesCount < 2 && aritcle.checked === true
       );
     });
   }

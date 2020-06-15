@@ -20,13 +20,13 @@ export class PostComponent implements OnInit {
   }
   getSelect(value) {
     this.checked = true;
-    if (value == 'Checked') {
+    if (value === 'Checked') {
       this.resetChecked();
     }
-    if (value == 'Unchecked') {
+    if (value === 'Unchecked') {
       this.resetUnChecked();
     }
-    if (value == 'Choose...') {
+    if (value === 'Choose...') {
       this.checked = false;
       this.reset();
     }
@@ -47,7 +47,7 @@ export class PostComponent implements OnInit {
     this.select = this.posts.filter(
       e => e.author.username.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
-    if (value == '') {
+    if (value === '') {
       this.checked = false;
     }
   }
@@ -68,8 +68,7 @@ export class PostComponent implements OnInit {
   openDialog(post) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = post;
-    if (post.video || post.image) dialogConfig.height = '800px';
-    else dialogConfig.height = '400px';
+    if (post.video || post.image) { dialogConfig.height = '800px'; } else { dialogConfig.height = '400px'; }
     dialogConfig.width = '660px';
 
     const dialogRef = this.dialog.open(DetaiPostComponent, dialogConfig);
@@ -80,12 +79,12 @@ export class PostComponent implements OnInit {
   }
   resetChecked() {
     this.apiService.get('/articles').subscribe(data => {
-      this.select = data.articles.filter(e => e.checked == true);
+      this.select = data.articles.filter(e => e.checked === true);
     });
   }
   resetUnChecked() {
     this.apiService.get('/articles').subscribe(data => {
-      this.select = data.articles.filter(e => e.checked == false);
+      this.select = data.articles.filter(e => e.checked === false);
     });
   }
   reset() {

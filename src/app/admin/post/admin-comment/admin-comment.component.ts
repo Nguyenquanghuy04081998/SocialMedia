@@ -28,7 +28,7 @@ export class AdminCommentComponent implements OnInit {
       this.apiService.post(`/articles/${this.slug}/prohibit`).subscribe(e => {
         this.apiService
           .post(`/users/${this.slug}/adminComment`, { text: comment })
-          .subscribe(e => {
+          .subscribe(article => {
             this.dialogRef.close();
           });
       });

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     });
     this.apiService.get('/articles').subscribe(dataPost => {
       this.totalPostPending = dataPost.articles.filter(
-        e => e.checked == false
+        e => e.checked === false
       ).length;
     });
     this.apiService.get('/tags').subscribe(dataTag => {

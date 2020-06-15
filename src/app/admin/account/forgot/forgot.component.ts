@@ -33,7 +33,7 @@ export class ForgotComponent implements OnInit {
     this.select = this.users.filter(
       e => e.email.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
-    if (value == '') {
+    if (value === '') {
       this.checked = false;
     }
   }
@@ -50,7 +50,7 @@ export class ForgotComponent implements OnInit {
   }
   reset() {
     this.apiService.get('/users/all').subscribe(data => {
-      this.users = data.user.filter(e => e.forgot == true);
+      this.users = data.user.filter(e => e.forgot === true);
     });
   }
   resetPassword(user) {

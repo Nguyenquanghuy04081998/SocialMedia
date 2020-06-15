@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     this.profile = this.allProfile.filter(
       e => e.username.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
-    if (value == '') {
+    if (value === '') {
       this.checked = false;
     }
   }

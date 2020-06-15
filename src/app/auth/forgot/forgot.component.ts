@@ -21,7 +21,7 @@ export class ForgotComponent implements OnInit {
 
   submit(email) {
     this.apiService
-      .post('/users/forgot/resetPassAndSendEmail', { email: email })
+      .post('/users/forgot/resetPassAndSendEmail', { email })
       .subscribe(
         e => {
           alert(
