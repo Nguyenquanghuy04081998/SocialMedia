@@ -6,6 +6,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { ApiService } from 'src/app/core/services/api.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Subscription } from 'rxjs';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { EditAvatarComponent } from './edit-avatar/edit-avatar.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -27,13 +29,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.subscribeUserName = this.route.params.subscribe(name => {
-      this.userName = name.username;
-      this.resetProfile();
+    this.subscribeUserName = this.route.params.subscribe(user => {
+      this.userName = user.username;
+      setTimeout( ()=>{
+        this.resetProfile();
+      },1000)
     });
 
     this.setUserName(this.userName);
@@ -55,6 +60,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   unFollow() {
+    
     this.subcribeUnFollow = this.profileService
       .unfollow(this.userName)
       .subscribe(() => {
@@ -63,14 +69,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   resetProfile() {
-    this.subscribeProfile = this.profileService
-      .getProfile(this.userName)
-      .subscribe(
-        profile => {
-          this.profile = profile.profile;
-        },
-        err => this.router.navigate(['notfound'])
-      );
+    
+      this.subscribeProfile = this.profileService
+        .getProfile(this.userName)
+        .subscribe(
+          profile => {
+          
+            this.profile = profile.user;
+            
+            
+          },
+          err => this.router.navigate(['notfound'])
+        );
   }
 
   setUserName(namePath) {
@@ -97,5 +107,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.subscribeProfile) {
       this.subscribeProfile.unsubscribe();
     }
+  }
+  changeAvatar(user){
+    const dialogConfig  = new MatDialogConfig();
+    dialogConfig.data = user;
+    dialogConfig.width = '500px';
+    dialogConfig.height = '500px';
+    const dialogRef = this.dialog.open(EditAvatarComponent,dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.resetProfile();
+    });
   }
 }

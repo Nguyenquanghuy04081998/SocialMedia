@@ -20,6 +20,7 @@ export class UserService {
   constructor(private apiService: ApiService, private jwtService: JwtService) {}
 
   setUser(user: User) {
+    // console.log(user.token);
     this.jwtService.saveToken(user.token);
     this.currentUserSubject.next(user);
     this.isAuthenticatedSubject.next(true);
@@ -35,9 +36,12 @@ export class UserService {
 
     const route = type === 'login' ? '/login' : '';
     this.jwtService.savePassWord(dataUser.password);
+    if(type =='login'){
+        delete dataUser.username;
+    }
     return this.apiService.post('/users' + route, { user: dataUser }).pipe(
       map(data => {
-        console.log(data);
+        
         this.setUser(data.user);
         return data;
       })
@@ -45,6 +49,6 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return this.apiService.get('/user');
+    return this.apiService.get('/users');
   }
 }

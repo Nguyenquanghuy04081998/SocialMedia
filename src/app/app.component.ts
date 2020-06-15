@@ -16,10 +16,15 @@ export class AppComponent implements OnInit {
     private jwtService: JwtService
   ) {}
   ngOnInit(): void {
+    
     if (this.jwtService.getToken()) {
-      this.apiService.get('/user').subscribe(
-        data => this.userService.setUser(data.user),
+      this.apiService.get('/users').subscribe(
+        
+        data => {
+          this.userService.setUser(data.user)
+          },
         err => this.userService.logOutUser()
+        
       );
     } else {
       this.userService.logOutUser();

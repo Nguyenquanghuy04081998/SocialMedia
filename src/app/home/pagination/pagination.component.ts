@@ -15,7 +15,7 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.get('/articles').subscribe(article => {
-      this.length = article.articlesCount;
+      this.length = article.articles.length;
     });
   }
 

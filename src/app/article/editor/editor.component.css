@@ -23,12 +23,12 @@
 a {
   color: #363636;
 }
-form button {
+.post {
   background-color: rgb(42, 125, 131);
   color: #ffffff;
   transition: 0.5s ease;
 }
-form button:hover {
+.post {
   background-color: rgb(57, 156, 163);
 }
 input {
@@ -47,3 +47,21 @@ input::placeholder {
   background: transparent;
   color: rgb(43, 155, 155);
 }
+.img{
+  position: relative;
+  width: 50%;
+}
+.icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  font-size: 2rem;
+  background-color: white;
+}
+.icon:hover{
+  color: brown;
+  font-size: 2.5rem;
+  transition: 0.5s;
+}
+

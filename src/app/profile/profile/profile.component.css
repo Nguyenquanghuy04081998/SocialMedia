@@ -27,3 +27,22 @@
   font-weight: 700;
   border-bottom: 2px solid #111111 !important;
 }
+img{
+  position: relative;
+}
+.edit-image{
+  position: absolute;
+  background-color: #00000066;
+  width: 100px;
+  height: 100px;
+  top:-98px;
+  left:  15px;
+  border-radius: 50%;
+  visibility: hidden;
+  color: white;
+  text-align: center;
+  padding-top: 49px;
+}
+.avatar:hover .edit-image{
+  visibility: visible;
+}

@@ -19,16 +19,17 @@ export class ArticlesService {
       return this.apiService.post('/articles', obj);
     }
   }
+ 
 
   deleteArticle(slug): Observable<any> {
     return this.apiService.delete(`/articles/${slug}`);
   }
 
-  favorite(slug): Observable<any> {
-    return this.apiService.post(`/articles/${slug}/favorite`);
-  }
+  // favorite(rate, slug): Observable<any> {
+  //   return this.apiService.post(`/articles/${slug}/${rate}/favorite`);
+  // }
 
-  unfavorite(slug): Observable<any> {
-    return this.apiService.delete(`/articles/${slug}/favorite`);
-  }
+  // unfavorite(slug): Observable<any> {
+  //   return this.apiService.delete(`/articles/${slug}/favorite`);
+  // }
 }

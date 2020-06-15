@@ -49,3 +49,7 @@ input::placeholder {
 .form-control{
   color: azure;
 }
+.error-messages{
+  background-color: white;
+  border-radius: 5px;
+}

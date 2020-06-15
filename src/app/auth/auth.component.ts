@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../core/services/user.service';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { ForgotComponent } from './forgot/forgot.component';
 
 @Component({
   selector: 'app-auth',
@@ -18,7 +20,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    public dialog: MatDialog
   ) {}
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -35,12 +38,17 @@ export class AuthComponent implements OnInit {
       this.title = this.formType === 'login' ? 'Sign in' : 'Sign up';
     });
   }
+  openDialog() {
+    const dialogConfig  = new MatDialogConfig();
+    dialogConfig.width = '500px';
+    dialogConfig.height = '250px';
+    const dialogRef = this.dialog.open(ForgotComponent,dialogConfig);
+  }
   submit() {
     this.userService.resovleAuth(this.formType, this.form.value).subscribe(
       () => this.router.navigateByUrl('/'),
       err => {
-        this.errors = err?.error?.errors;
-        this.errorEmailOrPassword = this.errors['email or password'];
+        this.errors = err.error;
       }
     );
   }

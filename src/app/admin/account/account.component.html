@@ -1,0 +1,77 @@
+<ol class="breadcrumb">
+    <li><a href="#">
+        <em class="fa fa-home"> / </em>
+    </a></li>
+    <li>Accounts</li>
+</ol>
+<div class="content">
+    <div class="title">
+      <!-- <a (click)="openDialogForgot(userForgot)" *ngIf="length!=0" style="color: red; float: right; font-weight: bold;" class="page-header important">{{length}} accounts have forgotten their password <i style="color: red;" class="fas fa-exclamation"></i></a> -->
+        <h1 class="page-header">Accounts </h1>
+        
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <form id = "search" style="width: 50%;">
+            <div class="form-group">
+              <input #input type="text" class="form-control" placeholder="Search email" (keyup)="search(input.value)">
+            </div>
+          </form>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group mb-3">
+            <select class="custom-select" id="inputGroupSelect02" #option (change)="getSelect(option.value)">
+              <option selected >Choose...</option>
+              <option value="active">Lock Active</option>
+              <option value="posting">Lock Posting</option>
+              <option value="comment">Lock Comment</option>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text" for="inputGroupSelect02">Options</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table style="width: 100%;" class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Username</th>
+            <th scope="col">email</th>
+            <th scope="col">Active</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Can Post</th>
+            <th scope="col">Can Comment</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="checked==false">
+          <tr *ngFor="let user of users">
+            <th scope="row">{{user._id}}</th>
+            <td >{{user.username}}</td>
+            <td >{{user.email}}</td>
+            <td [ngClass]="{'success':user.active,'danger':user.active==false}">{{user.active}}</td>
+            <td [ngClass]="{'success':user.admin,'danger':user.admin==false}">{{user.admin}}</td>
+            <td [ngClass]="{'success':user.canPost, 'danger':user.canPost==false}">{{user.canPost}}</td>
+            <td [ngClass]="{'success':user.canComment,'danger':user.canComment==false}">{{user.canComment}}</td>
+            <td><button (click)="openDialog(user)" mat-raised-button color="primary">Detail</button></td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="checked">
+          <tr *ngFor="let user of select">
+            <th scope="row">{{user._id}}</th>
+            <td >{{user.username}}</td>
+            <td >{{user.email}}</td>
+            <td [ngClass]="{'success':user.active,'danger':user.active==false}">{{user.active}}</td>
+            <td [ngClass]="{'success':user.admin,'danger':user.admin==false}">{{user.admin}}</td>
+            <td [ngClass]="{'success':user.canPost, 'danger':user.canPost==false}">{{user.canPost}}</td>
+            <td [ngClass]="{'success':user.canComment,'danger':user.canComment==false}">{{user.canComment}}</td>
+            <td><button (click)="openDialog(user)" mat-raised-button color="primary">Detail</button></td>
+          </tr>
+        </tbody>
+        <h1 *ngIf="checked&&select?.length==0" style="color: #a29d9d; text-align: center; font-size: 15px;">-- There is no data in this section --</h1>
+      </table>
+      
+</div>

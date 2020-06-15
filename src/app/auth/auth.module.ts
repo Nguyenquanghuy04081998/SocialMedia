@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { SettingComponent } from './setting/setting.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { CoreModule } from '../core/core.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+
+import { ForgotComponent } from './forgot/forgot.component';
 @NgModule({
-  declarations: [SettingComponent, AuthComponent],
-  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule],
+  declarations: [SettingComponent, AuthComponent, ForgotComponent],
+  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, MatFormFieldModule,MatButtonModule],
   exports: [SettingComponent]
 })
 export class AuthModule {}

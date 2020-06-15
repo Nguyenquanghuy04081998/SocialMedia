@@ -8,6 +8,7 @@ import { NotfoundComponent } from '../core/layout/notfound.component';
 import { CanActiveGuard } from './guards/can-active.guard';
 import { EditCanActiveGuard } from './guards/edit-can-active.guard';
 import { SettingDeactiveGuard } from './guards/setting-deactive.guard';
+import { ForgotComponent } from './forgot/forgot.component';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent, canActivate: [CanActiveGuard] },
@@ -18,6 +19,8 @@ const routes: Routes = [
     canActivate: [EditCanActiveGuard],
     canDeactivate: [SettingDeactiveGuard]
   },
+  {path: 'forgot', component: ForgotComponent}
+  ,
   { path: '**', component: NotfoundComponent }
 ];
 

@@ -1,0 +1,48 @@
+<div class="content">
+    <div class="title">
+        <h1 class="page-header">Accounts forgot password </h1>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <form id = "search" style="width: 50%;">
+            <div class="form-group">
+              <input #input type="text" class="form-control" placeholder="Search email" (keyup)="search(input.value)">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <table style="width: 100%;" class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Username</th>
+            <th scope="col">email</th>
+            <th scope="col">Action</th>
+            <th scope="col">Information</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="checked==false">
+          <tr *ngFor="let user of users">
+            <th scope="row">{{user._id}}</th>
+            <td >{{user.username}}</td>
+            <td >{{user.email}}</td>
+
+            <td><button (click)="resetPassword(user)" mat-raised-button color="accent">Reset Password (12345678)</button></td>
+            <td><button (click)="openDialog(user)" mat-raised-button color="primary">Detail</button></td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="checked">
+          <tr *ngFor="let user of select">
+            <th scope="row">{{user._id}}</th>
+            <td >{{user.username}}</td>
+            <td >{{user.email}}</td>
+            <td><button (click)="resetPassword(user)" mat-raised-button color="accent">Reset Password (12345678)</button></td>
+            <td><button (click)="openDialog(user)" mat-raised-button color="primary">Detail</button></td>
+          </tr>
+        </tbody>
+        <h1 *ngIf="checked&&select?.length==0" style="color: #a29d9d; text-align: center; font-size: 15px;">-- There is no data in this section --</h1>
+      </table>
+      
+</div>

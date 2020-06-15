@@ -1,6 +1,6 @@
 <div
   class="container"
-  *ngIf="articleList == undefined && articleListFilter == undefined"
+  *ngIf="articleList == undefined  && articleListFilter == undefined"
 >
   <mat-spinner> </mat-spinner>
 </div>
@@ -11,7 +11,7 @@
   <div class="article-preview" *ngFor="let article of articleList">
     <div class="article-meta">
       <a [routerLink]="['profile', article.author.username]"
-        ><img [src]="article.author.image"
+        ><img src="http://localhost:3000/api/image/avatar?image_name={{article.author.image}}"
       /></a>
       <div class="info">
         <a routerLink="profile/{{ article.author.username }}" class="author">{{
@@ -19,16 +19,55 @@
         }}</a>
         <span class="date">{{ article.createdAt | date: 'MMM dd y' }}</span>
       </div>
-      <button
-        class="btn btn-outline-info btn-sm pull-xs-right"
-        [ngClass]="{
-          'btn-outline-info': !article.favorited,
-          'btn-info': article.favorited
-        }"
-        (click)="toggleFavorite(article.slug, article.favorited)"
-      >
-        <i class="ion-heart"></i> {{ article.favoritesCount }}
-      </button>
+    
+      <label class="rateCount">{{article.favoritesCount}}</label>
+      <div class="stars" >
+        <ng-container *ngIf="article.favorited == 5">
+          <input  checked (click)="rate(5, article.slug)"class="star star-5" id="{{article.slug}}5" type="radio" name="{{article.slug}}"/>
+          <label  class="star star-5" for="{{article.slug}}5"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 5">
+          <input (click)="rate(5, article.slug)"class="star star-5" id="{{article.slug}}5" type="radio" name="{{article.slug}}"/>
+          <label  class="star star-5" for="{{article.slug}}5"></label>
+        </ng-container>
+          <!-- 4 -->
+        <ng-container *ngIf="article.favorited == 4">
+          <input checked  (click)="rate(4, article.slug)"class="star star-4" id="{{article.slug}}4" type="radio" name="{{article.slug}}"/>
+          <label class="star star-4" for="{{article.slug}}4"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 4">
+          <input   (click)="rate(4, article.slug)"class="star star-4" id="{{article.slug}}4" type="radio" name="{{article.slug}}"/>
+          <label class="star star-4" for="{{article.slug}}4"></label>
+        </ng-container>
+          <!-- 3 -->
+        <ng-container *ngIf="article.favorited == 3">
+          <input checked (click)="rate(3, article.slug)"class="star star-3" id="{{article.slug}}3" type="radio" name="{{article.slug}}"/>
+          <label class="star star-3" for="{{article.slug}}3"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 3">
+          <input (click)="rate(3, article.slug)"class="star star-3" id="{{article.slug}}3" type="radio" name="{{article.slug}}"/>
+          <label class="star star-3" for="{{article.slug}}3"></label>
+        </ng-container>
+          <!-- 2 -->
+        <ng-container *ngIf="article.favorited == 2">
+          <input checked (click)="rate(2, article.slug)"class="star star-2" id="{{article.slug}}2" type="radio" name="{{article.slug}}"/>
+          <label class="star star-2" for="{{article.slug}}2"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 2">
+          <input (click)="rate(2, article.slug)"class="star star-2" id="{{article.slug}}2" type="radio" name="{{article.slug}}"/>
+          <label class="star star-2" for="{{article.slug}}2"></label>
+        </ng-container>
+          <!-- 1 -->
+        <ng-container *ngIf="article.favorited == 1">
+          <input checked (click)="rate(1, article.slug)"class="star star-1" id="{{article.slug}}1" type="radio" name="{{article.slug}}"/>
+          <label class="star star-1" for="{{article.slug}}1"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 1">
+          <input (click)="rate(1, article.slug)"class="star star-1" id="{{article.slug}}1" type="radio" name="{{article.slug}}"/>
+          <label class="star star-1" for="{{article.slug}}1"></label>
+        </ng-container>
+      </div>
+      <!-- het thu -->
     </div>
     <a (click)="navigate(article.slug)" class="preview-link">
       <h1 class="ellipsis">{{ article.title }}</h1>
@@ -53,7 +92,7 @@
   <div class="article-preview" *ngFor="let article of articleListFilter">
     <div class="article-meta">
       <a (click)="navigateProfile(article.author.username)"
-        ><img [src]="article.author.image"
+        ><img  src="http://localhost:3000/api/image/avatar?image_name={{article.author.image}}"
       /></a>
       <div class="info">
         <a (click)="navigateProfile(article.author.username)" class="author">{{
@@ -61,16 +100,55 @@
         }}</a>
         <span class="date">{{ article.createdAt | date: 'MMM dd y' }}</span>
       </div>
-      <button
-        class="btn btn-outline-info btn-sm pull-xs-right"
-        [ngClass]="{
-          'btn-outline-info': !article.favorited,
-          'btn-info': article.favorited
-        }"
-        (click)="toggleFavorite(article.slug, article.favorited)"
-      >
-        <i class="ion-heart"></i> {{ article.favoritesCount }}
-      </button>
+      
+      <label class="rateCount">{{article.favoritesCount}}</label>
+      <div class="stars" >
+        <ng-container *ngIf="article.favorited == 5">
+          <input  checked (click)="rate(5, article.slug)"class="star star-5" id="{{article.slug}}5" type="radio" name="{{article.slug}}"/>
+          <label  class="star star-5" for="{{article.slug}}5"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 5">
+          <input (click)="rate(5, article.slug)"class="star star-5" id="{{article.slug}}5" type="radio" name="{{article.slug}}"/>
+          <label  class="star star-5" for="{{article.slug}}5"></label>
+        </ng-container>
+          <!-- 4 -->
+        <ng-container *ngIf="article.favorited == 4">
+          <input checked  (click)="rate(4, article.slug)"class="star star-4" id="{{article.slug}}4" type="radio" name="{{article.slug}}"/>
+          <label class="star star-4" for="{{article.slug}}4"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 4">
+          <input   (click)="rate(4, article.slug)"class="star star-4" id="{{article.slug}}4" type="radio" name="{{article.slug}}"/>
+          <label class="star star-4" for="{{article.slug}}4"></label>
+        </ng-container>
+          <!-- 3 -->
+        <ng-container *ngIf="article.favorited == 3">
+          <input checked (click)="rate(3, article.slug)"class="star star-3" id="{{article.slug}}3" type="radio" name="{{article.slug}}"/>
+          <label class="star star-3" for="{{article.slug}}3"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 3">
+          <input (click)="rate(3, article.slug)"class="star star-3" id="{{article.slug}}3" type="radio" name="{{article.slug}}"/>
+          <label class="star star-3" for="{{article.slug}}3"></label>
+        </ng-container>
+          <!-- 2 -->
+        <ng-container *ngIf="article.favorited == 2">
+          <input checked (click)="rate(2, article.slug)"class="star star-2" id="{{article.slug}}2" type="radio" name="{{article.slug}}"/>
+          <label class="star star-2" for="{{article.slug}}2"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 2">
+          <input (click)="rate(2, article.slug)"class="star star-2" id="{{article.slug}}2" type="radio" name="{{article.slug}}"/>
+          <label class="star star-2" for="{{article.slug}}2"></label>
+        </ng-container>
+          <!-- 1 -->
+        <ng-container *ngIf="article.favorited == 1">
+          <input checked (click)="rate(1, article.slug)"class="star star-1" id="{{article.slug}}1" type="radio" name="{{article.slug}}"/>
+          <label class="star star-1" for="{{article.slug}}1"></label>
+        </ng-container>
+        <ng-container *ngIf="article.favorited != 1">
+          <input (click)="rate(1, article.slug)"class="star star-1" id="{{article.slug}}1" type="radio" name="{{article.slug}}"/>
+          <label class="star star-1" for="{{article.slug}}1"></label>
+        </ng-container>
+      </div>
+      
     </div>
     <a (click)="navigate(article.slug)" class="preview-link">
       <h1 class="ellipsis">{{ article.title }}</h1>

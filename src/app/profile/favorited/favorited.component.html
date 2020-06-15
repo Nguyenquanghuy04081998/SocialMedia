@@ -12,7 +12,7 @@
       }}</a>
       <span class="date">{{ article.createdAt | date: 'MMM dd y' }}</span>
     </div>
-    <button
+    <!-- <button
       class="btn btn-outline-info btn-sm pull-xs-right"
       [ngClass]="{
         'btn-outline-info': !article.favorited,
@@ -21,7 +21,7 @@
       (click)="toggleFavorite(article.slug, article.favorited)"
     >
       <i class="ion-heart"></i> {{ article.favoritesCount }}
-    </button>
+    </button> -->
   </div>
   <a (click)="navigateDetail(article.slug)" class="preview-link">
     <h1 class="ellipsis">{{ article.title }}</h1>

@@ -8,6 +8,8 @@ import { UserService } from 'src/app/core/services/user.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { ApiService } from 'src/app/core/services/api.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
+import { log } from 'util';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail-article',
@@ -24,7 +26,7 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   userCurrent;
   commentVal;
-
+  error;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,7 +35,8 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private profileService: ProfileService,
     private jwtService: JwtService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -50,11 +53,15 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
     this.resetComment();
   }
 
+  getVideo(){
+    return 'https://www.youtube.com/embed/'+this.articleDetail.video;
+  }
+
   getArticleDetail() {
     this.subscribe = this.apiService
       .get(`/articles/${this.slug}`)
       .subscribe((data: any) => {
-        this.articleDetail = data.article;
+        this.articleDetail = data.articles;
         if (this.isAuthenticated) {
           this.userService.getCurrentUser().subscribe(curUser => {
             this.userCurrent = curUser.user;
@@ -66,8 +73,8 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
             }
           });
         }
+        this.articleDetail = data.articles;
 
-        this.articleDetail = data.article;
       });
   }
   ngOnDestroy(): void {
@@ -82,6 +89,9 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
         this.comments.unshift(newDataComment);
         this.resetComment();
         this.commentVal = '';
+      },
+      err=>{
+        this.error = err.error.error;
       });
   }
 
@@ -137,24 +147,19 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
     return;
   }
 
-  toggleFavorite(slug, favorited) {
-    if (favorited === false) {
-      this.subscribe = this.articleService
-        .favorite(slug)
-        .subscribe((data: any) => {
-          data.article.favoritesCount++;
-          this.getArticleDetail();
-        });
-    } else {
-      this.subscribe = this.articleService
-        .unfavorite(slug)
-        .subscribe((data: any) => {
-          data.article.favoritesCount--;
-          this.getArticleDetail();
-        });
-    }
-  }
   navigate(username) {
     this.router.navigate(['profile', username]);
+  }
+   rate(rate, slug){
+    
+    this.subscribe = this.apiService.post(`/articles/${slug}/${rate}/favorite`).subscribe( data => {
+       this.getArticleDetail();
+       this.resetComment();
+    });
+    if (!this.isAuthenticated) {
+      this.router.navigateByUrl('/auth/login');
+      return;
+    }
+    
   }
 }

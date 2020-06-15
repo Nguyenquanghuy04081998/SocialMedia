@@ -1,4 +1,4 @@
-<nav class="container navbar-expand-md navbar-light ml-auto">
+<nav  class="container navbar-expand-md navbar-light ml-auto">
   <button
     class="navbar-toggler"
     type="button"
@@ -10,7 +10,7 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+  <div  class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <a
       class="navbar-brand d-none d-xs-none d-sm-none d-md-inline-block d-lg-inline-block"
       routerLink="/"
@@ -22,6 +22,24 @@
         height="50px"
       />
     </a>
+    
+    <div class="col-md-7" class="autocomplete" style="margin-top: 10px">
+      <div  class="md-form">
+        <form   autocomplete="off" action="/action_page.php">
+          <div class="autocomplete" style="width:300px;">
+            <input style="display: inline-block;" #input id="myInput" type="text" name="myCountry" placeholder="Search username" (keyup)="search(input.value)" ><i (click)="input.value=''; checked=false" *ngIf="input.value" class="fas fa-times icon"></i>
+            <div class="div-arround" *ngIf="checked"><div class="autocomplete-items"  *ngFor="let user of profile" (click)="input.value='';viewProfile(user.username)"><img
+              src="http://localhost:3000/api/image/avatar?image_name={{user.image}}"
+              class="user-image"
+            />{{user.username}}
+          </div>
+          </div> 
+            
+          </div>
+          
+        </form>
+      </div>
+    </div>
     <!-- Show this for logged out users -->
     <ul
       *ngIf="isActive == false"
@@ -86,7 +104,7 @@
           routerLinkActive="active"
         >
           <img
-            [src]="userActive.image"
+            src="http://localhost:3000/api/image/avatar?image_name={{userActive.image}}"
             *ngIf="userActive.image"
             class="user-pic"
           />

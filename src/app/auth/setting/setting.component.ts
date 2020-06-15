@@ -13,6 +13,7 @@ import { log } from 'util';
   styleUrls: ['./setting.component.css']
 })
 export class SettingComponent implements OnInit, OnDestroy {
+  image;
   errors;
   userCurrent: User;
   checkCandiactive: boolean;
@@ -54,12 +55,32 @@ export class SettingComponent implements OnInit, OnDestroy {
     if (this.form.value.password === '') {
       this.form.value.password = this.jwtService.getPassword();
     }
+    console.log(this.form.value.password);
+    
     this.subscribe = this.apiService
-      .put(`/user`, { user: this.form.value })
+      .put(`/users`, { user: this.form.value })
       .subscribe(
         data => {
-          console.log(data.user);
-          
+          if (this.image) {
+            const formData = new FormData();
+            formData.append("file", this.image);
+            this.apiService
+              .postImage("/image/upload_avatar", formData)
+              .subscribe(res => {
+                const data = {
+                  id_user: this.userCurrent._id,
+                  name_image: res.filename
+                };
+                this.apiService
+                  .post("/image/editAvatar", { data: data })
+                  .subscribe(async e => {
+                  console.log(e);
+                  
+                    this.router.navigate(['/profile', this.form.value.username]);
+                  }),
+                  err => console.log(err);
+              })
+          } 
           this.router.navigate(['/profile', this.form.value.username]);
           this.userService.currentUserSubject.next(data.user);
         },
@@ -75,21 +96,16 @@ export class SettingComponent implements OnInit, OnDestroy {
     this.userService.logOutUser();
     this.router.navigateByUrl('/');
   }
-
-  deleteAccount() {
-    console.log(this.userCurrent.token);
-
-    this.apiService
-      .delete('/profiles/' + this.userCurrent.username)
-      .subscribe(e => {
-        this.userService.logOutUser();
-        this.router.navigateByUrl('/');
-      });
-  }
-
   ngOnDestroy() {
     if (this.subscribe) {
       this.subscribe.unsubscribe();
     }
+  }
+  selectImage(event) {
+    if (event.target.files.length > 0) {
+      this.image = event.target.files[0];
+    }
+    console.log(this.image);
+    
   }
 }

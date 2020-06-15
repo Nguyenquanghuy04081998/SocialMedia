@@ -1,15 +1,15 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/core/services/api.service';
-import { Article } from 'src/app/core/models';
-import { Subscription } from 'rxjs';
-import { ArticlesService } from 'src/app/core/services/articles.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ApiService } from "src/app/core/services/api.service";
+import { Article } from "src/app/core/models";
+import { Subscription } from "rxjs";
+import { ArticlesService } from "src/app/core/services/articles.service";
+import { UserService } from "src/app/core/services/user.service";
 
 @Component({
-  selector: 'app-list-article',
-  templateUrl: './list-article.component.html',
-  styleUrls: ['./list-article.component.css']
+  selector: "app-list-article",
+  templateUrl: "./list-article.component.html",
+  styleUrls: ["./list-article.component.css"]
 })
 export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
   @Input() nameTag;
@@ -25,6 +25,7 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
   subscribe: Subscription;
   displayArticle: string;
   isAuthenticated: boolean;
+  currentUser;
 
   constructor(
     private router: Router,
@@ -43,14 +44,18 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.checkProfile = false;
     }
-    this.filerArticle();
-    this.getArticle();
+      this.filerArticle();
+      this.getArticle();
+    
 
     this.subscribe = this.userService.isAuthenticated.subscribe(
       authenticated => {
         this.isAuthenticated = authenticated;
       }
     );
+    this.userService.getCurrentUser().subscribe(e => {
+      this.currentUser = e.user;
+    });
   }
 
   ngOnChanges() {
@@ -58,19 +63,20 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   navigate(url) {
-    this.router.navigate(['article', url]);
+    this.router.navigate(["article", url]);
   }
 
   navigateProfile(url) {
-    this.router.navigate(['profile', url]);
+    this.router.navigate(["profile", url]);
   }
 
   filerArticle() {
     this.subscribe = this.apiService
-      .get('/articles', this.namePath, '20')
+      .get("/articles", this.namePath, "20")
       .subscribe(listArticle => {
-        this.articleListFilter = listArticle.articles;
-
+        this.articleListFilter = listArticle.articles.filter(
+          e => e.checked == true
+        );
         if (this.articleListFilter) {
           this.error = false;
         }
@@ -84,7 +90,8 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getArticle() {
-    this.displayArticle = this.config === 'all' ? '' : 'feed';
+    this.displayArticle = this.config === "all" ? "" : "feed";
+
     this.subscribe = this.apiService
       .get(
         `/articles/${this.displayArticle}`,
@@ -95,38 +102,34 @@ export class ListArticleComponent implements OnInit, OnChanges, OnDestroy {
         this.nameTag
       )
       .subscribe(listArticle => {
-        this.articleList = listArticle.articles;
-        if (this.articleList) {
+        if (listArticle) {
+          this.articleList = listArticle.articles.filter(
+            e => e.checked == true
+          );
           this.errorFeed = false;
         }
-        if (this.articleList.length === 0 || this.articleList === undefined) {
+        // if (listArticle.articles.length === 0 || listArticle.articles === undefined) {
+        if (
+          listArticle.articles === undefined ||
+          listArticle.articles.length == 0
+        ) {
           this.errorFeed = true;
         }
       });
-      console.log(this.articleList);
-      
   }
 
-  toggleFavorite(slug, favorited) {
+  rate(rate, slug) {
+    this.subscribe = this.apiService
+    .post(`/articles/${slug}/${rate}/favorite`)
+    .subscribe(data => {
+        this.filerArticle();
+        this.getArticle();
+    });
     if (!this.isAuthenticated) {
-      this.router.navigateByUrl('/auth/login');
+      this.router.navigateByUrl("/auth/login");
       return;
     }
-    if (favorited === false) {
-      this.subscribe = this.articleService.favorite(slug).subscribe(data => {
-        data.article.favoritesCount++;
-        this.getArticle();
-        this.filerArticle();
-      });
-    } else {
-      this.subscribe = this.articleService.unfavorite(slug).subscribe(data => {
-        data.article.favoritesCount--;
-        this.getArticle();
-        this.filerArticle();
-      });
-    }
   }
-
   ngOnDestroy() {
     this.subscribe.unsubscribe();
   }

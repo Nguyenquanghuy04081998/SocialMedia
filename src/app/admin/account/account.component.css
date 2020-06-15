@@ -1,0 +1,47 @@
+
+.page-header {
+    margin-top: 20px;
+    margin-left: 20px;
+    border-bottom: 0;
+}
+a.page-header {
+    margin-bottom: 10px;
+    display: block;
+}
+.breadcrumb em{
+    color: #30a5ff;
+}
+.breadcrumb{
+    border-radius: 0;
+    padding: 10px 15px 10px 15px;
+    background: #e9ecf2;
+    margin: 0; 
+}
+table{
+    margin-left: 5px;
+    background-color: white;
+}
+.success{
+    color: green;
+    font-weight: bold;
+}
+.danger{
+    color: red;
+    font-weight: bold;
+}
+.table {
+    border-top: 1px solid #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px -1px rgba(92, 91, 92, 1);
+  }
+
+  .important{
+    -webkit-animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -webkit-animation-duration: 1s;
+}
+@-webkit-keyframes blinker {
+    from { opacity: 1.0; }
+    to { opacity: 0.0; }
+  }

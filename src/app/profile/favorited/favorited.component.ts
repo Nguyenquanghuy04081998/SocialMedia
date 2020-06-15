@@ -40,8 +40,6 @@ export class FavoritedComponent implements OnInit {
       )
       .subscribe(data => {
         this.listFavorite = data.articles;
-        console.log(this.listFavorite);
-
         if (this.listFavorite) {
           this.error = false;
         }
@@ -49,23 +47,6 @@ export class FavoritedComponent implements OnInit {
           this.error = true;
         }
       });
-  }
-  toggleFavorite(slug, favorited) {
-    if (favorited === false) {
-      this.subscribe = this.articleService
-        .favorite(slug)
-        .subscribe((data: any) => {
-          data.article.favoritesCount++;
-          this.getArticle();
-        });
-    } else {
-      this.subscribe = this.articleService
-        .unfavorite(slug)
-        .subscribe((data: any) => {
-          data.article.favoritesCount--;
-          this.getArticle();
-        });
-    }
   }
   navigate(username) {
     this.router.navigate(['profile', username]);

@@ -13,6 +13,8 @@ import { HeaderComponent } from './core/layout/header/header.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
@@ -25,7 +27,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AuthModule,
     ProfileModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

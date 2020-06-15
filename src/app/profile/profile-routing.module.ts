@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { ListArticleComponent } from '../article/list-article/list-article.component';
 import { FavoritedComponent } from './favorited/favorited.component';
+import { BandArticleComponent } from './band-article/band-article.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'favorites',
         component: FavoritedComponent
+      },
+      {
+        path:'prohibit',
+        component: BandArticleComponent
       }
     ]
   }

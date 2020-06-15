@@ -11,20 +11,20 @@
             >Need an account?</a
           >
         </p>
-        <ul class="error-messages" *ngIf="errors?.username">
+        <!-- <ul class="error-messages" *ngIf="errors?.username">
           <li *ngFor="let err of errors.username">Username: {{ err }}</li>
         </ul>
         <ul class="error-messages" *ngIf="errors?.email">
           <li *ngFor="let err of errors.email">Email: {{ err }}</li>
+        </ul> -->
+        <ul class="error-messages" *ngIf="errors">
+          <li>Error: {{ errors.error }}</li>
         </ul>
-        <ul class="error-messages" *ngIf="errors?.password">
-          <li *ngFor="let err of errors.password">Password: {{ err }}</li>
-        </ul>
-        <ul class="error-messages" *ngIf="errorEmailOrPassword">
+        <!-- <ul class="error-messages" *ngIf="errorEmailOrPassword">
           <li *ngFor="let err of errorEmailOrPassword">
             Email or Password: {{ err }}
           </li>
-        </ul>
+        </ul> -->
         <form [formGroup]="form" (submit)="submit()">
           <fieldset class="form-group">
             <input
@@ -94,6 +94,11 @@
           <button type="submit" class="btn btn-lg pull-xs-right">
             {{ title }}
           </button>
+          <p >
+            <a style="color: #93fdb9;" (click)="openDialog()"
+              >Forgotten account?</a
+            >
+          </p>
         </form>
       </div>
     </div>

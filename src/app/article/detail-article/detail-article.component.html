@@ -1,10 +1,9 @@
 <div class="article-page" *ngIf="articleDetail != undefined">
   <div class="banner">
     <div class="container">
-      <h1>{{ articleDetail.title }}</h1>
       <div class="article-meta">
         <a (click)="navigate(articleDetail.author.username)"
-          ><img src="{{ articleDetail.author.image }}"
+          ><img   src="http://localhost:3000/api/image/avatar?image_name={{articleDetail.author.image}}"
         /></a>
         <div class="info">
           <a (click)="navigate(articleDetail.author.username)" class="author">{{
@@ -52,145 +51,119 @@
             &nbsp; Unfollow {{ articleDetail?.author.username }}
           </button>
           &nbsp;&nbsp;
-          <ng-container *ngIf="!articleDetail?.favorited">
-            <button
-              class="btn btn-outline-info btn-sm"
-              [ngClass]="{
-                'btn-outline-info': !articleDetail?.favorited,
-                'btn-info': articleDetail?.favorited
-              }"
-              (click)="
-                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
-              "
-            >
-              <i class="ion-heart"></i>
-              &nbsp; Favorite Post
-              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
-            </button>
-          </ng-container>
-          <ng-container *ngIf="articleDetail?.favorited">
-            <button
-              class="btn btn-outline-info btn-sm"
-              [ngClass]="{
-                'btn-outline-info': !articleDetail?.favorited,
-                'btn-info': articleDetail?.favorited
-              }"
-              (click)="
-                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
-              "
-            >
-              <i class=" ion-heart"></i>
-              &nbsp; Un-Favorite Post
-              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
-            </button>
-          </ng-container>
+        
         </ng-container>
+        <label  class="rateCount">{{articleDetail.favoritesCount}}</label>
+        <div class="stars" >
+          <ng-container *ngIf="articleDetail.favorited == 5">
+            <input  checked (click)="rate(5, articleDetail.slug)"class="star star-5" id="{{articleDetail.slug}}5" type="radio" name="{{articleDetail.slug}}"/>
+            <label  class="star star-5" for="{{articleDetail.slug}}5"></label>
+          </ng-container>
+          <ng-container *ngIf="articleDetail.favorited != 5">
+            <input (click)="rate(5, articleDetail.slug)"class="star star-5" id="{{articleDetail.slug}}5" type="radio" name="{{articleDetail.slug}}"/>
+            <label  class="star star-5" for="{{articleDetail.slug}}5"></label>
+          </ng-container>
+            <!-- 4 -->
+          <ng-container *ngIf="articleDetail.favorited == 4">
+            <input checked  (click)="rate(4, articleDetail.slug)"class="star star-4" id="{{articleDetail.slug}}4" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-4" for="{{articleDetail.slug}}4"></label>
+          </ng-container>
+          <ng-container *ngIf="articleDetail.favorited != 4">
+            <input   (click)="rate(4, articleDetail.slug)"class="star star-4" id="{{articleDetail.slug}}4" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-4" for="{{articleDetail.slug}}4"></label>
+          </ng-container>
+            <!-- 3 -->
+          <ng-container *ngIf="articleDetail.favorited == 3">
+            <input checked (click)="rate(3, articleDetail.slug)"class="star star-3" id="{{articleDetail.slug}}3" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-3" for="{{articleDetail.slug}}3"></label>
+          </ng-container>
+          <ng-container *ngIf="articleDetail.favorited != 3">
+            <input (click)="rate(3, articleDetail.slug)"class="star star-3" id="{{articleDetail.slug}}3" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-3" for="{{articleDetail.slug}}3"></label>
+          </ng-container>
+            <!-- 2 -->
+          <ng-container *ngIf="articleDetail.favorited == 2">
+            <input checked (click)="rate(2, articleDetail.slug)"class="star star-2" id="{{articleDetail.slug}}2" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-2" for="{{articleDetail.slug}}2"></label>
+          </ng-container>
+          <ng-container *ngIf="articleDetail.favorited != 2">
+            <input (click)="rate(2, articleDetail.slug)"class="star star-2" id="{{articleDetail.slug}}2" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-2" for="{{articleDetail.slug}}2"></label>
+          </ng-container>
+            <!-- 1 -->
+          <ng-container *ngIf="articleDetail.favorited == 1">
+            <input checked (click)="rate(1, articleDetail.slug)"class="star star-1" id="{{articleDetail.slug}}1" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-1" for="{{articleDetail.slug}}1"></label>
+          </ng-container>
+          <ng-container *ngIf="articleDetail.favorited != 1">
+            <input (click)="rate(1, articleDetail.slug)"class="star star-1" id="{{articleDetail.slug}}1" type="radio" name="{{articleDetail.slug}}"/>
+            <label class="star star-1" for="{{articleDetail.slug}}1"></label>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container page">
-    <div class="row article-content">
-      <span
+    <span
         class="tag-pill tag-default"
         *ngFor="let item of articleDetail.tagList"
       >
         {{ item }}
       </span>
-      <div class="col-md-12">
-        <p>
-          {{ articleDetail.body }}
-        </p>
-      </div>
+      <!-- neu co ca anh va video -->
+    <div class="row article-content">
+      <ng-container *ngIf="articleDetail.video&&articleDetail.image">
+        <div class="col-md-12">
+          <p>
+            {{ articleDetail.body }}
+          </p>
+        </div>
+        <div class="row">
+          <div *ngIf="articleDetail.image" class="col-md-6">
+            <img width="100%" height="100%" src="http://localhost:3000/api/image?image_name={{articleDetail?.image}}">
+          </div>
+          <div *ngIf="articleDetail.video" class="col-md-6">
+            <iframe width="560" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(getVideo())' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </ng-container>
+      <!-- neu chi co anh ko co video -->
+      <ng-container *ngIf="!articleDetail.video&&articleDetail.image">
+        <div class="col-md-6">
+          <p>
+            {{ articleDetail.body }}
+          </p>
+        </div>
+        <div *ngIf="articleDetail.image" class="col-md-6">
+          <img width="100%" height="100%" src="http://localhost:3000/api/image?image_name={{articleDetail?.image}}">
+        </div>
+      </ng-container>
+      <!-- neu chi co video ko co anh -->
+      <ng-container *ngIf="articleDetail.video&&!articleDetail.image">
+        <div class="col-md-6">
+          <p>
+            {{ articleDetail.body }}
+          </p>
+        </div>
+        <div *ngIf="articleDetail.video" class="col-md-6">
+          <iframe width="560" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(getVideo())' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </ng-container>
+      <!-- neu khong co anh cung khong co video -->
+      <ng-container *ngIf="!articleDetail.video&&!articleDetail.image">
+        <div class="col-md-12">
+          <p>
+            {{ articleDetail.body }}
+          </p>
+        </div>
+      </ng-container>
+        
     </div>
 
     <hr />
 
-    <div class="article-actions">
-      <div class="article-meta">
-        <a (click)="navigate(articleDetail.author.username)"
-          ><img src="{{ articleDetail.author.image }}"
-        /></a>
-        <div class="info">
-          <a (click)="navigate(articleDetail.author.username)" class="author">{{
-            articleDetail.author.username
-          }}</a>
-          <span class="date">{{
-            articleDetail.createdAt | date: 'MMM dd y'
-          }}</span>
-        </div>
-        <ng-container *ngIf="checkUser">
-          <button
-            class="btn btn-sm btn-outline-secondary"
-            [routerLink]="['/editor', slug]"
-          >
-            <i class="fas fa-edit"></i>
-            &nbsp; Edit Article
-          </button>
-          &nbsp;&nbsp;
-          <button
-            class="btn btn-sm btn-outline-danger"
-            (click)="deleteArticle()"
-          >
-            <i class="fas fa-trash-alt"></i>
-            &nbsp; Delete Article
-          </button>
-        </ng-container>
-
-        <ng-container *ngIf="checkUser == false">
-          <button
-            (click)="follow()"
-            *ngIf="articleDetail?.author.following == false"
-            class="btn btn-sm btn-outline-secondary action-btn"
-          >
-            <i class="ion-plus-round"></i>
-            &nbsp; Follow {{ articleDetail?.author.username }}
-            <span class="counter">({{ articleDetail.favoritesCount }})</span>
-          </button>
-          <button
-            (click)="unFollow()"
-            *ngIf="articleDetail?.author.following == true"
-            class="btn btn-sm btn-outline-secondary action-btn"
-          >
-            <i class="ion-plus-round"></i>
-            &nbsp; Unfollow {{ articleDetail?.author.username }}
-          </button>
-          &nbsp;&nbsp;
-          <ng-container *ngIf="!articleDetail?.favorited">
-            <button
-              class="btn btn-outline-info btn-sm"
-              [ngClass]="{
-                'btn-outline-info': !articleDetail?.favorited,
-                'btn-info': articleDetail?.favorited
-              }"
-              (click)="
-                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
-              "
-            >
-              <i class="ion-heart"></i>
-              &nbsp; Favorite Post
-              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
-            </button>
-          </ng-container>
-          <ng-container *ngIf="articleDetail?.favorited">
-            <button
-              class="btn btn-outline-info btn-sm"
-              [ngClass]="{
-                'btn-outline-info': !articleDetail?.favorited,
-                'btn-info': articleDetail?.favorited
-              }"
-              (click)="
-                toggleFavorite(articleDetail?.slug, articleDetail?.favorited)
-              "
-            >
-              <i class=" ion-heart"></i>
-              &nbsp; Un-Favorite Post
-              <span class="counter">({{ articleDetail?.favoritesCount }})</span>
-            </button>
-          </ng-container>
-        </ng-container>
-      </div>
-    </div>
+   
     <div class="container" *ngIf="isAuthenticated == false">
       <p>
         <a routerLink="/auth/login">Sign in</a> or
@@ -198,7 +171,10 @@
         article.
       </p>
     </div>
-    <div class="row" *ngIf="isAuthenticated">
+    <ul class="error-messages" *ngIf="error">
+      <li>Error: {{ error }}</li>
+    </ul>
+    <div style="margin-top: 50px;" class="row" *ngIf="isAuthenticated">
       <div class="col-xs-12 col-md-8 offset-md-2">
         <form class="card comment-form">
           <div class="card-block">
@@ -212,7 +188,7 @@
             ></textarea>
           </div>
           <div class="card-footer">
-            <img [src]="userCurrent?.image" class="comment-author-img" />
+            <img src="http://localhost:3000/api/image/avatar?image_name={{userCurrent?.image}}" class="comment-author-img" />
             <button
               class="btn btn-sm btn-info"
               (click)="postComment(comment.value)"
@@ -230,7 +206,7 @@
           </div>
           <div class="card-footer">
             <a href="" class="comment-author">
-              <img src="{{ item.author?.image }}" class="comment-author-img" />
+              <img src="http://localhost:3000/api/image/avatar?image_name={{ item?.author?.image }}" class="comment-author-img" />
             </a>
             &nbsp;
             <a
@@ -245,7 +221,7 @@
               *ngIf="userCurrent?.username == item.author?.username"
               class="mod-options"
             >
-              <i class="ion-trash-a" (click)="deleteComment(item.id)"></i>
+              <i class="ion-trash-a" (click)="deleteComment(item._id)"></i>
             </span>
           </div>
         </div>

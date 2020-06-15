@@ -15,7 +15,7 @@
 
         <form (submit)="submit()" [formGroup]="form">
           <fieldset>
-            <fieldset class="form-group">
+            <!-- <fieldset class="form-group">
               <input
                 formControlName="image"
                 class="form-control"
@@ -23,7 +23,8 @@
                 placeholder="URL of profile picture"
                 value="{{ userCurrent?.image }}"
               />
-            </fieldset>
+            </fieldset> -->
+            <input  class="custom-file" (change)="selectImage($event)" multiple  id="file" type="file"/>
             <fieldset class="form-group">
               <input
                 formControlName="username"
@@ -100,12 +101,6 @@
           class="btn btn-lg btn-outline-danger pull-xs-left"
         >
           Log Out
-        </button>
-        <button
-          (click)="deleteAccount()"
-          class="btn btn-lg btn-outline-danger pull-xs-left"
-        >
-          Delete account!
         </button>
       </div>
     </div>

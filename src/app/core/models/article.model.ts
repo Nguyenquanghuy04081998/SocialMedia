@@ -1,6 +1,7 @@
 import { Profile } from './profile.model';
 
 export interface Article {
+  _id: string;
   slug: string;
   title: string;
   description: string;
@@ -8,7 +9,10 @@ export interface Article {
   tagList: string[];
   createdAt: string;
   updatedAt: string;
-  favorited: boolean;
+  favorited: number;
   favoritesCount: number;
   author: Profile;
+  image: string,
+  video: string,
+  adminChecked:string
 }

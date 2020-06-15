@@ -19,6 +19,7 @@ export class ApiService {
     favorited?: string,
     tag?: string
   ): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     let params = new HttpParams();
     if (author) {
       params = params.set('author', author);
@@ -35,19 +36,20 @@ export class ApiService {
     if (offset) {
       params = params.set('offset', offset);
     }
-    return this.http.get(`${API}${path}`, { params });
+    return this.http.get(`${API}${path}`, { params, headers });
   }
 
-  post(path: string, data?: object): Observable<any> {
-    console.log(`${API}${path}`);
-
+  post(path: string, data?: object, image?): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${API}${path}`, JSON.stringify(data), {
-      headers
-    });
+    return this.http.post(`${API}${path}`, JSON.stringify(data),{headers});
   }
-
+  postImage(path: string, data?: object): Observable<any> {
+    console.log(data);
+    return this.http.post(`${API}${path}`, data);
+  }
   put(path: string, body: object = {}): Observable<any> {
+    console.log(body);
+    
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(`${API}${path}`, JSON.stringify(body), {
       headers
@@ -55,7 +57,8 @@ export class ApiService {
   }
 
   delete(path: string, token?): Observable<any> {
-    return this.http.delete(`${API}${path}`, token);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete(`${API}${path}`, token,);
   }
 
   setUserName(name) {
